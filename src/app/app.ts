@@ -1,47 +1,72 @@
-import { Client, ClientEvents } from 'discord.js';
-import { DiscordCommandBuilder, DiscordCommandCallback, DiscordEventCallback } from '../types';
+import { Client, SlashCommandBuilder } from 'discord.js';
+import { CommandCallback, DiscordEvents, EventCallback } from '../types';
 
-export interface IDiscordCommand {
-    data: DiscordCommandBuilder;
-    callback: DiscordCommandCallback;
+export enum EventType {
+    Discord = 0,
 }
 
-export interface IDiscordEvent {
-    name: keyof ClientEvents;
-    callback: DiscordEventCallback;
+export interface EventMap {
+    [EventType.Discord]: DiscordEvents;
+}
+
+export interface Event<
+    T extends EventType,
+    U extends keyof EventMap[T]
+> {
+    type: T;
+    name: U;
+    cb: EventCallback<T, U>;
+}
+
+export interface BaseCommand {
+    data: SlashCommandBuilder;
+    cb: CommandCallback;
+}
+
+export interface Command extends BaseCommand {
+    data: SlashCommandBuilder;
+}
+
+interface AppOptions {
+    client: Client;
+    commands: Command[];
+    events: Event<any, any>[];
 }
 
 export class App {
     public readonly client: Client;
-    public readonly commands: Map<string, IDiscordCommand>;
-    public readonly events: Map<string, IDiscordEvent>;
+    public readonly commands: Command[];
+    public readonly events: Event<any, any>[];
 
-    constructor(
-        client: Client,
-        commands: Map<string, IDiscordCommand>,
-        events: Map<string, IDiscordEvent>,
-    ) {
-        this.client = client;
-        this.commands = commands;
-        this.events = events;
+    constructor(options: AppOptions) {
+        this.client = options.client;
+        this.commands = options.commands;
+        this.events = options.events;
     }
 
     public init() {
-        this.registerDiscordEvents();
+        this.registerEvents();
     }
 
-    public async login(token: string) {
-        return await this.client.login(token);
-    }
-
-    public registerDiscordEvents() {
-        for (const event of this.events.values()) {
-            this.client.on(event.name, (...args) => event.callback(this, ...args));
+    private registerEvents() {
+        for (const { name, cb } of this.events) {
+            this.client.on(name as string, (...args) => cb(this, ...args));
         }
     }
 
-    public async deployDiscordCommands() {
-        const slashCommands = Array.from(this.commands.values(), (command) => command.data);
-        await this.client.application?.commands.set(slashCommands);
+    public deployCommands() {
+        const commands = this.commands.map(({ data }) => data);
+        this.client.application?.commands.set(commands);
     }
+}
+
+export function createEvent<
+    T extends EventType,
+    U extends keyof EventMap[T]
+>(event: Event<T, U>) {
+    return event;
+}
+
+export function createCommand(command: Command) {
+    return command;
 }

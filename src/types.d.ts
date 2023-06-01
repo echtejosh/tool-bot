@@ -1,28 +1,17 @@
-import { App } from './app/app';
-import { Awaitable, CommandInteraction, CommandInteractionOptionResolver, SlashCommandBuilder } from 'discord.js';
+import { ClientEvents, CommandInteraction } from 'discord.js';
+import { App, EventMap, EventType } from './app/app';
 
-export type DiscordEventCallback = (
+export type DiscordEvents = ClientEvents;
+
+type EventCallback<
+    T extends EventType,
+    U extends keyof EventMap[T]
+> = (
     app: App,
-    ...args?: any
-) => Awaitable<void>
+    ...args: EventMap[T][U]
+) => Promise<void>
 
-export type DiscordCommandCallback = (
+export type CommandCallback = (
     app: App,
     interaction: CommandInteraction,
-) => Awaitable<void>
-
-export type CommandOptions = CommandInteractionOptionResolver;
-
-export type DiscordCommandBuilder = Omit<SlashCommandBuilder,
-    'addSubcommandGroup' |
-    'addSubcommand' |
-    'addBooleanOption' |
-    'addUserOption' |
-    'addChannelOption' |
-    'addRoleOption' |
-    'addAttachmentOption' |
-    'addMentionableOption' |
-    'addStringOption' |
-    'addIntegerOption' |
-    'addNumberOption'
->
+) => Promise<void>;

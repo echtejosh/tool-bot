@@ -1,41 +1,25 @@
 import 'dotenv/config';
 import { App } from './app/app';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { processDiscordCommands, processDiscordEvents } from './util/util';
-
-import Echo from './commands/echo';
-import Clear from './commands/clear';
-
-import Ready from './events/ready';
-import InteractionCreate from './events/interactionCreate';
+import * as commands from './commands/index';
+import * as events from './events/index';
 
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
     ],
 });
 
-const commands = processDiscordCommands(
-    Echo,
-    Clear,
-);
+const app = new App({
+    client: client,
+    commands: Object.values(commands),
+    events: Object.values(events),
+});
 
-const events = processDiscordEvents(
-    Ready,
-    InteractionCreate,
-);
-
-const app = new App(
-    client,
-    commands,
-    events,
-);
-
-app.login(process.env.SECRET_TOKEN!)
-    .then(() => console.log('Logged in'))
-    .catch(() => console.error('Invalid token'));
+client
+    .login(process.env.SECRET_TOKEN)
+    .then(() => console.log('Logged in'));
 
 app.init();

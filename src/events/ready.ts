@@ -1,12 +1,11 @@
-import { App, IDiscordEvent } from '../app/app';
-import { ClientEvents } from 'discord.js';
+import { createEvent, EventType } from '../app/app';
+import { Events } from 'discord.js';
 
-class Ready implements IDiscordEvent {
-    public name: keyof ClientEvents = 'ready';
+export const ready = createEvent({
+    type: EventType.Discord,
+    name: Events.ClientReady,
 
-    async callback(app: App) {
-        await app.deployDiscordCommands();
-    };
-}
-
-export default new Ready();
+    cb: async (app) => {
+        app.deployCommands();
+    },
+});

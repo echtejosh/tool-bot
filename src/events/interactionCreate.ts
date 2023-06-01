@@ -1,26 +1,28 @@
-import { App, IDiscordEvent } from '../app/app';
-import { BaseInteraction, ClientEvents } from 'discord.js';
+import { Events } from 'discord.js';
+import { createEvent, EventType } from '../app/app';
+import * as commands from '../commands/index';
 
-class InteractionCreate implements IDiscordEvent {
-    public name: keyof ClientEvents = 'interactionCreate';
+export const interactionCreate = createEvent({
+    type: EventType.Discord,
+    name: Events.InteractionCreate,
 
-    async callback(app: App, interaction: BaseInteraction) {
+    cb: async (app, interaction) => {
         if (!interaction.isCommand()) {
             return;
         }
 
-        const command = app.commands.get(interaction.commandName);
+        const command = Object.values(commands).find(
+            ({ data }) => data.name === interaction.commandName,
+        );
 
-        if (!command) {
+        if (!command || !interaction.member) {
             return;
         }
 
         try {
-            await command.callback(app, interaction);
+            await command.cb(app, interaction);
         } catch (err) {
             console.error(err);
         }
-    };
-}
-
-export default new InteractionCreate();
+    },
+});
