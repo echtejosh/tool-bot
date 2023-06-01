@@ -14,7 +14,7 @@ class Echo implements IDiscordCommand {
 
     async callback(app: App, interaction: CommandInteraction) {
         const options = interaction.options as CommandOptions;
-        const message: string | null = options.getString('message');
+        const message = options.getString('message');
 
         if (!message) {
             return;
