@@ -4,6 +4,7 @@ import { Client, GatewayIntentBits } from 'discord.js';
 import { processDiscordCommands, processDiscordEvents } from './util/util';
 
 import Echo from './commands/echo';
+import Clear from './commands/clear';
 
 import Ready from './events/ready';
 import InteractionCreate from './events/interactionCreate';
@@ -19,6 +20,7 @@ const client = new Client({
 
 const commands = processDiscordCommands(
     Echo,
+    Clear,
 );
 
 const events = processDiscordEvents(
