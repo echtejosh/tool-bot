@@ -1,5 +1,5 @@
 import { App } from './app/app';
-import { Awaitable, CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { Awaitable, CommandInteraction, CommandInteractionOptionResolver, SlashCommandBuilder } from 'discord.js';
 
 export type DiscordEventCallback = (
     app: App,
@@ -10,6 +10,8 @@ export type DiscordCommandCallback = (
     app: App,
     interaction: CommandInteraction,
 ) => Awaitable<void>
+
+export type CommandOptions = CommandInteractionOptionResolver;
 
 export type DiscordCommandBuilder = Omit<SlashCommandBuilder,
     'addSubcommandGroup' |

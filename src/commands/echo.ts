@@ -1,6 +1,6 @@
 import { App, IDiscordCommand } from '../app/app';
-import { CommandInteraction, CommandInteractionOptionResolver, SlashCommandBuilder } from 'discord.js';
-import { DiscordCommandBuilder } from '../types';
+import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { CommandOptions, DiscordCommandBuilder } from '../types';
 
 class Echo implements IDiscordCommand {
     public data: DiscordCommandBuilder = new SlashCommandBuilder()
@@ -13,8 +13,8 @@ class Echo implements IDiscordCommand {
         );
 
     async callback(app: App, interaction: CommandInteraction) {
-        const options = interaction.options as CommandInteractionOptionResolver;
-        const message = options.getString('message');
+        const options = interaction.options as CommandOptions;
+        const message: string | null = options.getString('message');
 
         if (!message) {
             return;
