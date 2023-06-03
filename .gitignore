@@ -13,6 +13,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .build
 .idea
 .git
+.env
 
 # Runtime data
 pids
