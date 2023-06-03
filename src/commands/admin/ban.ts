@@ -1,6 +1,9 @@
 import {
-    PermissionFlagsBits,
+    Guild,
+    GuildMember,
     SlashCommandBuilder,
+    inlineCode,
+    PermissionFlagsBits,
 } from 'discord.js';
 import { createCommand } from '../../app/app';
 
@@ -11,33 +14,30 @@ export const ban = createCommand({
         .setDefaultMemberPermissions(
             PermissionFlagsBits.Administrator |
             PermissionFlagsBits.ManageMessages |
-            PermissionFlagsBits.BanMembers
+            PermissionFlagsBits.BanMembers,
         )
-        .addUserOption(
-            (option) => option
+        .addUserOption((option) => option
                 .setName('user')
                 .setDescription('Provide a user')
-                .setRequired(true)
+                .setRequired(true),
         ),
 
-
     cb: async (app, interaction) => {
+        const member = interaction.options.getMember('user') as GuildMember;
 
-        const member = interaction.options.getUser('user');
-        const user = interaction.options.getMember('user');
+        const response = await member.ban()
+            .then(() => true)
+            .catch(() => false);
 
-        if(!interaction.guild || !member) {
+        if (!response) {
             await interaction.reply({
-                content: 'You do not have the necessary permissions to use this command',
+                content: 'This member cannot be banned',
                 ephemeral: true,
             });
-            await interaction.reply('Something went wrong');
+
             return;
         }
-        const guildMember = await interaction.guild.members.fetch(member.id);
-        await guildMember.ban();
 
-        await interaction.reply(`\`${member.username}\` has been banned!`);
-
-    }
+        await interaction.reply(`${inlineCode(member.user.username)} has been banned!`);
+    },
 });

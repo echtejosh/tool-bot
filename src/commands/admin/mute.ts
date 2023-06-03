@@ -1,5 +1,5 @@
 import {
-    CommandInteractionOptionResolver,
+    CommandInteractionOptionResolver, Guild, GuildMember, inlineCode,
     PermissionFlagsBits,
     SlashCommandBuilder,
 } from 'discord.js';
@@ -12,40 +12,50 @@ export const mute = createCommand({
         .setDefaultMemberPermissions(
             PermissionFlagsBits.Administrator |
             PermissionFlagsBits.ManageMessages |
-            PermissionFlagsBits.MuteMembers
+            PermissionFlagsBits.MuteMembers,
         )
-        .addUserOption(
-            (option) => option
-                .setName('user')
-                .setDescription('Provide a user')
-                .setRequired(true)
+        .addUserOption((option) => option
+            .setName('member')
+            .setDescription('Provide a member')
+            .setRequired(true),
         )
         .addNumberOption((option) => option
-            .setName('time')
+            .setName('minutes')
             .setDescription('Provide an amount of time in minutes')
             .setRequired(true)
             .setMinValue(1)
-            .setMaxValue(1440)
+            .setMaxValue(1440),
         ),
 
 
     cb: async (app, interaction) => {
-
-        const member = interaction.options.getUser('user');
         const options = interaction.options as CommandInteractionOptionResolver;
-        if(!interaction.guild || !member) {
-            await interaction.reply({
-                content: 'You do not have the necessary permissions to use this command',
-                ephemeral: true,
-            });
-            await interaction.reply('Something went wrong');
+        const guild = interaction.guild;
+
+        if (!guild) {
             return;
         }
-        const timeAmount = options.getNumber('time')!;
-        const guildMember = await interaction.guild.members.fetch(member.id);
-        await guildMember.timeout(timeAmount, 'Muted');
 
-        await interaction.reply(`\`${member.username}\` has been muted for ${timeAmount} minutes`);
+        const member = options.getMember('member') as GuildMember;
+        const timeout = options.getNumber('minutes');
 
-    }
+        if (!timeout) {
+            return;
+        }
+
+        const response = await member.timeout(timeout * 60 * 1000)
+            .then(() => true)
+            .catch(() => false);
+
+        if (!response) {
+            await interaction.reply({
+                content: 'This member cannot be muted',
+                ephemeral: true,
+            });
+
+            return;
+        }
+
+        await interaction.reply(`${inlineCode(member.user.username)} has been muted for ${timeout} minutes`);
+    },
 });

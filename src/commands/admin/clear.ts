@@ -1,8 +1,9 @@
 import {
     CommandInteractionOptionResolver,
-    PermissionFlagsBits,
+    GuildTextBasedChannel,
+    inlineCode,
     SlashCommandBuilder,
-    TextChannel,
+    PermissionFlagsBits,
 } from 'discord.js';
 import { createCommand } from '../../app/app';
 
@@ -12,22 +13,30 @@ export const clear = createCommand({
         .setDescription('Clears a specified amount of messages in the current text channel')
         .setDefaultMemberPermissions(
             PermissionFlagsBits.Administrator |
-            PermissionFlagsBits.ManageMessages
+            PermissionFlagsBits.ManageMessages,
         )
         .addNumberOption((option) => option
             .setName('amount')
             .setDescription('Provide an amount')
             .setRequired(true)
             .setMinValue(1)
-            .setMaxValue(100)
+            .setMaxValue(100),
         ),
 
     cb: async (app, interaction) => {
         const options = interaction.options as CommandInteractionOptionResolver;
-        const textChannel = interaction.channel as TextChannel;
-        const amount = options.getNumber('amount')!;
+        const amount = options.getNumber('amount');
 
-        const  removedMessages = await textChannel.bulkDelete(amount, true);
-        await interaction.reply(`\`${removedMessages.size}\` messages removed`);
+        if (
+            !amount ||
+            !interaction.inGuild() ||
+            !interaction.channel
+        ) {
+            return;
+        }
+
+        const { size } = await interaction.channel.bulkDelete(amount);
+
+        await interaction.reply(`${inlineCode(size.toString())} messages removed`);
     },
 });

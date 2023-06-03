@@ -1,4 +1,5 @@
 import {
+    CommandInteractionOptionResolver, Guild, GuildMember, GuildTextBasedChannel, inlineCode,
     PermissionFlagsBits,
     SlashCommandBuilder,
 } from 'discord.js';
@@ -11,31 +12,32 @@ export const kick = createCommand({
         .setDefaultMemberPermissions(
             PermissionFlagsBits.Administrator |
             PermissionFlagsBits.ManageMessages |
-            PermissionFlagsBits.KickMembers
+            PermissionFlagsBits.KickMembers,
         )
-        .addUserOption(
-            (option) => option
-                .setName('user')
-                .setDescription('Provide a user')
-                .setRequired(true)
+        .addUserOption((option) => option
+            .setName('user')
+            .setDescription('Provide a user')
+            .setRequired(true),
         ),
 
 
     cb: async (app, interaction) => {
+        const member =  interaction.options.getMember('user') as GuildMember;
 
-        const member = interaction.options.getUser('user');
-        if(!interaction.guild || !member) {
+        const response = await member.kick()
+            .then(() => true)
+            .catch(() => false);
+
+        if (!response) {
             await interaction.reply({
-                content: 'You do not have the necessary permissions to use this command',
+                content: 'This member cannot be kicked',
                 ephemeral: true,
             });
-            await interaction.reply('Something went wrong');
+
             return;
         }
-        const guildMember = await interaction.guild.members.fetch(member.id);
-        await guildMember.kick();
 
-        await interaction.reply(`\`${member.username}\` has been kicked`);
+        await interaction.reply(`${inlineCode(member.user.username)} has been kicked`);
 
-    }
+    },
 });
