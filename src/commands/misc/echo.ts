@@ -1,7 +1,7 @@
 import { CommandInteractionOptionResolver, GuildMember, SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 import { createCommand } from '../../app/app';
 
-export const ping = createCommand({
+export const echo = createCommand({
     data: new SlashCommandBuilder()
         .setName('echo')
         .setDescription('Repeats a given message in the same channel')
@@ -28,7 +28,7 @@ export const ping = createCommand({
             return;
         }
 
-        const hidden = options.getBoolean('hidden') || false;
+        const hidden = options.getBoolean('hidden') ?? false;
 
         if (hidden) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator)) {
@@ -43,7 +43,7 @@ export const ping = createCommand({
             await interaction.deferReply();
             await interaction.deleteReply();
 
-            interaction.channel.send(message);
+            await interaction.channel.send(message);
         }
 
         await interaction.reply(message);
