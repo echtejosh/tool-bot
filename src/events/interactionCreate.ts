@@ -15,7 +15,10 @@ export const interactionCreate = createEvent({
             ({ data }) => data.name === interaction.commandName,
         );
 
-        if (!command || !interaction.member) {
+        if (
+            !command ||
+            !interaction.member
+        ) {
             return;
         }
 
