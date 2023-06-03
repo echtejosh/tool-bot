@@ -1,5 +1,7 @@
 import {
-    CommandInteractionOptionResolver, Guild, GuildMember, inlineCode,
+    CommandInteractionOptionResolver,
+    GuildMember,
+    inlineCode,
     PermissionFlagsBits,
     SlashCommandBuilder,
 } from 'discord.js';
@@ -26,7 +28,6 @@ export const mute = createCommand({
             .setMinValue(1)
             .setMaxValue(1440),
         ),
-
 
     cb: async (app, interaction) => {
         const options = interaction.options as CommandInteractionOptionResolver;

@@ -1,5 +1,6 @@
 import {
-    CommandInteractionOptionResolver, Guild, GuildMember, GuildTextBasedChannel, inlineCode,
+    GuildMember,
+    inlineCode,
     PermissionFlagsBits,
     SlashCommandBuilder,
 } from 'discord.js';
@@ -38,6 +39,5 @@ export const kick = createCommand({
         }
 
         await interaction.reply(`${inlineCode(member.user.username)} has been kicked`);
-
     },
 });
