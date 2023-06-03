@@ -1,5 +1,5 @@
-import { Client, SlashCommandBuilder } from 'discord.js';
-import { CommandCallback, DiscordEvents, EventCallback } from '../types';
+import { Client } from 'discord.js';
+import { CommandBuilder, CommandCallback, DiscordEvents, EventCallback } from '../types';
 
 export enum EventType {
     Discord = 0,
@@ -19,12 +19,12 @@ export interface Event<
 }
 
 export interface BaseCommand {
-    data: SlashCommandBuilder;
+    data: CommandBuilder;
     cb: CommandCallback;
 }
 
 export interface Command extends BaseCommand {
-    data: SlashCommandBuilder;
+    data: CommandBuilder;
 }
 
 interface AppOptions {

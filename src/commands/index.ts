@@ -1,1 +1,1 @@
-export * from './echo';
+export * from './misc/echo';
