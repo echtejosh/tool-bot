@@ -3,7 +3,6 @@ import { createCommand } from '../../app/app';
 import axios from 'axios';
 import { ChartJSNodeCanvas } from 'chartjs-node-canvas';
 import { ChartConfiguration } from 'chart.js';
-import { color } from 'chart.js/helpers';
 
 export const price = createCommand({
     data: new SlashCommandBuilder()
