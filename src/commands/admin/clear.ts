@@ -29,8 +29,8 @@ export const clear = createCommand({
 
         if (
             !amount ||
-            !interaction.inGuild() ||
-            !interaction.channel
+            !interaction.channel ||
+            !interaction.inGuild()
         ) {
             return;
         }

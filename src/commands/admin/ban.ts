@@ -17,9 +17,9 @@ export const ban = createCommand({
             PermissionFlagsBits.BanMembers,
         )
         .addUserOption((option) => option
-                .setName('user')
-                .setDescription('Provide a user')
-                .setRequired(true),
+            .setName('user')
+            .setDescription('Provide a user')
+            .setRequired(true),
         ),
 
     cb: async (app, interaction) => {
