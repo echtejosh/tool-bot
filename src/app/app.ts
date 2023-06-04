@@ -57,7 +57,6 @@ export class App {
     public deployCommands() {
         const commands = this.commands.map(({ data }) => data);
         this.client.application?.commands.set(commands);
-        console.log(commands)
     }
 }
 

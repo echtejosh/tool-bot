@@ -1,78 +1,91 @@
 import {
     CommandInteractionOptionResolver,
-    SlashCommandBuilder,
     EmbedBuilder,
+    SlashCommandBuilder,
 } from 'discord.js';
 import { createCommand } from '../../app/app';
 import { load } from 'cheerio';
-import puppeteer from 'puppeteer';
+import axios from 'axios';
 
 export const weather = createCommand({
     data: new SlashCommandBuilder()
         .setName('weather')
-        .setDescription('Shows the weather in a specified city')
-        .addStringOption((option) =>
-            option.setName('country').setDescription('Set country')
-        )
-        .addStringOption((option) => option.setName('city').setDescription('Set city')),
+        .setDescription('Shows the weather in a specified location')
+        .addStringOption((option) => option
+            .setName('search_term')
+            .setDescription('Provide a search term')
+            .setRequired(true),
+        ),
 
     cb: async (client, interaction) => {
         const options = interaction.options as CommandInteractionOptionResolver;
-        let country = options.getString('country');
-        let city = options.getString('city');
-
-        if (!country || !city) {
-            await interaction.reply('Please provide a valid country and city.');
-            return;
-        }
-
-        country = country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
-        city = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
-
-        const url = `https://www.google.com/search?q=${encodeURIComponent(
-            country
-        )},+${encodeURIComponent(city)},+weather`;
+        const term = options.getString('search_term')!;
 
         try {
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
+            const response = await axios.get(`http://weather.service.msn.com/find.aspx?src=outlook&weadegreetype=C&culture=en-US&weasearchstr=${encodeURI(term)}`, {
+                timeout: 2000,
+            });
 
-            await page.goto(url);
-            await page.waitForSelector('#wob_tm');
+            const $ = load(response.data, {
+                xmlMode: true,
+            });
 
-            const html = await page.content();
-            const $ = load(html);
-
-            const temperature = $('#wob_tm').text();
-            const humidity = $('#wob_hm').text();
-            const wind = $('#wob_ws').text();
-            const precipitation = $('#wob_pp').text();
-            const time = $('#wob_dts').text();
-
-            console.log('Temperature: ' + temperature);
-            console.log('Humidity: ' + humidity);
-            console.log('Wind: ' + wind);
-            console.log('Precipitation: ' + precipitation);
-            console.log('Time: ' + time);
-
-            await browser.close();
+            const current = $('current');
 
             const embed = new EmbedBuilder()
-                .setTitle(`Weather in ${city}, ${country}`)
+                .setTitle(`Weather in ${current.attr('observationpoint')}`)
                 .addFields(
-                    { name: 'Temperature', value: temperature, inline: true },
-                    { name: 'Humidity', value: humidity, inline: true },
-                    { name: 'Wind', value: wind, inline: true },
-                    { name: 'Precipitation', value: precipitation, inline: true },
-                    { name: 'Time', value: time, inline: true }
+                    {
+                        name: 'Temperature',
+                        value: current.attr('temperature')! + ' °C',
+                        inline: true,
+                    },
+                    {
+                        name: 'Condition',
+                        value: current.attr('skytext')!,
+                        inline: true,
+                    },
+                    {
+                        name: 'Date',
+                        value: new Date(current.attr('date')!).toLocaleDateString('en-US', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric',
+                        }),
+                        inline: true,
+                    },
+                    {
+                        name: 'Observation time',
+                        value: current.attr('observationtime')!.split(':').slice(0, 2).join(':'),
+                        inline: true,
+                    },
+                    {
+                        name: 'Feels like',
+                        value: current.attr('feelslike')! + ' °C',
+                        inline: true,
+                    },
+                    {
+                        name: 'Humidity',
+                        value: current.attr('humidity')!,
+                        inline: true,
+                    },
+                    {
+                        name: 'Wind',
+                        value: current.attr('windspeed')!,
+                        inline: true,
+                    },
                 );
 
-            await interaction.reply({ embeds: [embed] });
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-            await interaction.reply(
-                'An error occurred while fetching weather data. Please try again later.'
-            );
+            await interaction.reply({
+                embeds: [embed],
+            });
+        } catch (err) {
+            await interaction.reply({
+                content: 'Unable to fetch weather information, try again',
+                ephemeral: true,
+            });
+
+            return;
         }
     },
 });
