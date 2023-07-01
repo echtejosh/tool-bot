@@ -1,13 +1,15 @@
-import { Events } from 'discord.js';
 import { createEvent, EventType } from '../app/app';
 import * as commands from '../commands/index';
 
 export const interactionCreate = createEvent({
     type: EventType.Discord,
-    name: Events.InteractionCreate,
+    name: 'interactionCreate',
 
     cb: async (app, interaction) => {
-        if (!interaction.isCommand()) {
+        if (
+            !interaction.isCommand() ||
+            !interaction.inGuild()
+        ) {
             return;
         }
 
@@ -17,11 +19,12 @@ export const interactionCreate = createEvent({
 
         if (
             !command ||
-            !interaction.member
+            !interaction.member ||
+            !interaction.isChatInputCommand()
         ) {
             return;
         }
-
+        
         try {
             await command.cb(app, interaction);
         } catch (err) {

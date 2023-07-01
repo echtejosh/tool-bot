@@ -1,4 +1,4 @@
-import { CommandInteractionOptionResolver, GuildMember, SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
+import { GuildMember, SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 import { createCommand } from '../../app/app';
 
 export const echo = createCommand({
@@ -17,9 +17,7 @@ export const echo = createCommand({
 
     cb: async (app, interaction) => {
         const member = interaction.member as GuildMember;
-        const options = interaction.options as CommandInteractionOptionResolver;
-
-        const message = options.getString('message');
+        const message = interaction.options.getString('message');
 
         if (
             !message ||
@@ -28,7 +26,7 @@ export const echo = createCommand({
             return;
         }
 
-        const hidden = options.getBoolean('hidden') ?? false;
+        const hidden = interaction.options.getBoolean('hidden') ?? false;
 
         if (hidden) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator)) {

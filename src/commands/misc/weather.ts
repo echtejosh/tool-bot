@@ -37,7 +37,7 @@ export const weather = createCommand({
                 .addFields(
                     {
                         name: 'Temperature',
-                        value: current.attr('temperature')! + ' °C',
+                        value: current.attr('temperature') + ' °C',
                         inline: true,
                     },
                     {
@@ -61,7 +61,7 @@ export const weather = createCommand({
                     },
                     {
                         name: 'Feels like',
-                        value: current.attr('feelslike')! + ' °C',
+                        value: current.attr('feelslike') + ' °C',
                         inline: true,
                     },
                     {

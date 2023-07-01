@@ -1,17 +1,23 @@
 import { Client } from 'discord.js';
-import { CommandBuilder, CommandCallback, DiscordEvents, EventCallback } from '../types';
+import { CommandBuilder, CommandCallback, DiscordEvents, EventCallback, PlayerEvents } from '../types';
+import { DisTubeEvents } from 'distube';
+import { Player } from './player';
 
 export enum EventType {
-    Discord = 0,
+    Discord = 'discord',
+    Distube = 'distube',
+    Player = 'player',
 }
 
-export interface EventMap {
+export interface Events {
     [EventType.Discord]: DiscordEvents;
+    [EventType.Distube]: DisTubeEvents;
+    [EventType.Player]: PlayerEvents;
 }
 
 export interface Event<
     T extends EventType,
-    U extends keyof EventMap[T]
+    U extends keyof Events[T]
 > {
     type: T;
     name: U;
@@ -29,28 +35,34 @@ export interface Command extends BaseCommand {
 
 interface AppOptions {
     client: Client;
+    player: Player;
     commands: Command[];
     events: Event<any, any>[];
 }
 
 export class App {
     public readonly client: Client;
+    public readonly player: Player;
     public readonly commands: Command[];
     public readonly events: Event<any, any>[];
 
     constructor(options: AppOptions) {
         this.client = options.client;
+        this.player = options.player;
         this.commands = options.commands;
         this.events = options.events;
     }
 
     public init() {
         this.registerEvents();
+        this.player.registerEvents(this);
     }
 
     private registerEvents() {
-        for (const { name, cb } of this.events) {
-            this.client.on(name as string, (...args) => cb(this, ...args));
+        for (const { type, name, cb } of this.events) {
+            if (type === EventType.Discord) {
+                this.client.on(name as string, (...args) => cb(this, ...args));
+            }
         }
     }
 
@@ -62,7 +74,7 @@ export class App {
 
 export function createEvent<
     T extends EventType,
-    U extends keyof EventMap[T]
+    U extends keyof Events[T]
 >(event: Event<T, U>) {
     return event;
 }

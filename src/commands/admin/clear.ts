@@ -24,8 +24,7 @@ export const clear = createCommand({
         ),
 
     cb: async (app, interaction) => {
-        const options = interaction.options as CommandInteractionOptionResolver;
-        const amount = options.getNumber('amount');
+        const amount = interaction.options.getNumber('amount');
 
         if (
             !amount ||

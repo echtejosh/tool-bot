@@ -1,19 +1,23 @@
-import { ClientEvents, CommandInteraction, SlashCommandBuilder } from 'discord.js';
-import { App, EventMap, EventType } from './app/app';
+import { ClientEvents, ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { App, Events, EventType } from './app/app';
 
 export type DiscordEvents = ClientEvents;
 
+export interface PlayerEvents {
+    error: [discord.CommandInteraction, Error];
+}
+
 type EventCallback<
     T extends EventType,
-    U extends keyof EventMap[T]
+    U extends keyof Events[T]
 > = (
     app: App,
-    ...args: EventMap[T][U]
+    ...args: Events[T][U]
 ) => Promise<void>
 
 export type CommandCallback = (
     app: App,
-    interaction: CommandInteraction,
+    interaction: ChatInputCommandInteraction,
 ) => Promise<void>;
 
 export type CommandBuilder = Omit<SlashCommandBuilder,

@@ -21,15 +21,10 @@ export const kick = createCommand({
             .setRequired(true),
         ),
 
-
     cb: async (app, interaction) => {
-        const member =  interaction.options.getMember('user') as GuildMember;
+        const member = interaction.options.getMember('user') as GuildMember;
 
-        const response = await member.kick()
-            .then(() => true)
-            .catch(() => false);
-
-        if (!response) {
+        if (!member.kickable) {
             await interaction.reply({
                 content: 'This member cannot be kicked',
                 ephemeral: true,
@@ -37,6 +32,8 @@ export const kick = createCommand({
 
             return;
         }
+
+        await member.kick();
 
         await interaction.reply(`${inlineCode(member.user.username)} has been kicked`);
     },
