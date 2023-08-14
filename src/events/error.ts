@@ -9,7 +9,7 @@ export const error = createEvent({
         await delay(1000);
 
         try {
-            const reply = interaction.replied ? interaction.followUp.bind(interaction) : interaction.reply.bind(interaction);
+            const reply: Function = interaction.replied ? interaction.followUp.bind(interaction) : interaction.reply.bind(interaction);
 
             reply('I was unable to process your request, please try again');
         } catch (err) {
