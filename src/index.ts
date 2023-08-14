@@ -12,7 +12,7 @@ const client = new Client({
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildModeration,
-        GatewayIntentBits.GuildVoiceStates
+        GatewayIntentBits.GuildVoiceStates,
     ],
 });
 
@@ -47,8 +47,8 @@ const app = new App({
     events: Object.values(events),
 });
 
-client
-    .login(process.env.SECRET_TOKEN)
-    .then(() => console.log('Logged in'));
+client.login(process.env.SECRET_TOKEN).then(
+    () => console.log('Logged in'),
+);
 
 app.init();

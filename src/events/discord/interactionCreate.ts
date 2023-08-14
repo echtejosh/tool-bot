@@ -1,6 +1,5 @@
-import { createEvent, EventType } from '../app/app';
-import * as commands from '../commands/index';
-import { GuildMember } from 'discord.js';
+import { createEvent, EventType } from '../../app/app';
+import * as commands from '../../commands';
 
 export const interactionCreate = createEvent({
     type: EventType.Discord,

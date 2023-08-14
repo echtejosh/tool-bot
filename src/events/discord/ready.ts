@@ -1,4 +1,4 @@
-import { createEvent, EventType } from '../app/app';
+import { createEvent, EventType } from '../../app/app';
 
 export const ready = createEvent({
     type: EventType.Discord,
