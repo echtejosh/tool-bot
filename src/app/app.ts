@@ -1,4 +1,4 @@
-import { Client, Permissions } from 'discord.js';
+import { Client } from 'discord.js';
 import { CommandBuilder, CommandCallback, DiscordEvents, EventCallback, PlayerEvents } from '../types';
 import { DisTubeEvents } from 'distube';
 import { Player } from './player';
@@ -61,13 +61,9 @@ export class App {
         for (const { type, name, cb } of this.events) {
             if (type === EventType.Discord) {
                 this.client.on(name, (...args) => cb(this, ...args));
-            }
-
-            if (type === EventType.Distube) {
+            } else if (type === EventType.Distube) {
                 this.player.distube.on(name, (...args: any[]) => cb(this, ...args));
-            }
-
-            if (type === EventType.Player) {
+            } else if (type === EventType.Player) {
                 this.player.emitter.on(name, (...args) => cb(this, ...args));
             }
         }
