@@ -4,3 +4,7 @@ export * from './admin/clear';
 export * from './admin/kick';
 export * from './admin/ban';
 export * from './music/play';
+export * from './music/queue';
+export * from './music/nowplaying';
+export * from './music/stop';
+export * from './music/skip';

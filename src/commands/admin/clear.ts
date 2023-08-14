@@ -10,7 +10,7 @@ import { createCommand } from '../../app/app';
 export const clear = createCommand({
     data: new SlashCommandBuilder()
         .setName('clear')
-        .setDescription('Clears a specified amount of messages in the current text channel')
+        .setDescription('Clear a specified amount of messages')
         .setDefaultMemberPermissions(
             PermissionFlagsBits.Administrator |
             PermissionFlagsBits.ManageMessages,
@@ -36,6 +36,6 @@ export const clear = createCommand({
 
         const { size } = await interaction.channel.bulkDelete(amount);
 
-        await interaction.reply(`${inlineCode(size.toString())} messages removed`);
+        await interaction.reply(`\`${size}\` messages removed`);
     },
 });

@@ -35,6 +35,6 @@ export const kick = createCommand({
 
         await member.kick();
 
-        await interaction.reply(`${inlineCode(member.user.username)} has been kicked`);
+        await interaction.reply(`\`${member.user.username}\` has been kicked`);
     },
 });

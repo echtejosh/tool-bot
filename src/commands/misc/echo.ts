@@ -4,7 +4,7 @@ import { createCommand } from '../../app/app';
 export const echo = createCommand({
     data: new SlashCommandBuilder()
         .setName('echo')
-        .setDescription('Repeats a given message in the same channel')
+        .setDescription('Repeats a given message')
         .addStringOption((option) => option
             .setName('message')
             .setDescription('Provide a message')
@@ -26,7 +26,7 @@ export const echo = createCommand({
             return;
         }
 
-        const hidden = interaction.options.getBoolean('hidden') ?? false;
+        const hidden = interaction.options.getBoolean('hidden');
 
         if (hidden) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator)) {

@@ -10,7 +10,7 @@ import axios from 'axios';
 export const weather = createCommand({
     data: new SlashCommandBuilder()
         .setName('weather')
-        .setDescription('Shows the weather in a specified location')
+        .setDescription('Show weather information of a specified location')
         .addStringOption((option) => option
             .setName('search_term')
             .setDescription('Provide a search term')
@@ -19,17 +19,14 @@ export const weather = createCommand({
 
     cb: async (client, interaction) => {
         const options = interaction.options as CommandInteractionOptionResolver;
-        const term = options.getString('search_term')!;
+        const searchTerm = options.getString('search_term')!;
 
         try {
-            const response = await axios.get(`http://weather.service.msn.com/find.aspx?src=outlook&weadegreetype=C&culture=en-US&weasearchstr=${encodeURI(term)}`, {
+            const response = await axios.get(`http://weather.service.msn.com/find.aspx?src=outlook&weadegreetype=C&culture=en-US&weasearchstr=${encodeURI(searchTerm)}`, {
                 timeout: 2000,
             });
 
-            const $ = load(response.data, {
-                xmlMode: true,
-            });
-
+            const $ = load(response.data, { xmlMode: true });
             const current = $('current');
 
             const embed = new EmbedBuilder()
@@ -76,9 +73,7 @@ export const weather = createCommand({
                     },
                 );
 
-            await interaction.reply({
-                embeds: [embed],
-            });
+            await interaction.reply({ embeds: [embed] });
         } catch (err) {
             await interaction.reply({
                 content: 'Unable to fetch weather information, try again',

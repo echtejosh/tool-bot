@@ -1,9 +1,7 @@
 import {
-    Guild,
     GuildMember,
     SlashCommandBuilder,
     inlineCode,
-    PermissionFlagsBits,
 } from 'discord.js';
 import { createCommand } from '../../app/app';
 
@@ -11,11 +9,6 @@ export const ban = createCommand({
     data: new SlashCommandBuilder()
         .setName('ban')
         .setDescription('Ban a member from the server')
-        .setDefaultMemberPermissions(
-            PermissionFlagsBits.Administrator |
-            PermissionFlagsBits.ManageMessages |
-            PermissionFlagsBits.BanMembers,
-        )
         .addUserOption((option) => option
             .setName('user')
             .setDescription('Provide a user')
@@ -36,6 +29,6 @@ export const ban = createCommand({
 
         await member.ban();
 
-        await interaction.reply(`${inlineCode(member.user.username)} has been banned!`);
+        await interaction.reply(`\`${member.user.username}\` has been banned!`);
     },
 });
