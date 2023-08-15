@@ -25,7 +25,7 @@ export const queue = createCommand({
 
         let description = '';
         for (const [position, song] of upcomingSongs.entries()) {
-            description += bold(position + 1) + ` - ${song.name} - ${song.formattedDuration} \n\n`;
+            description += `${bold(position + 1)} - ${song.name} - ${song.formattedDuration} \n\n`;
         }
 
         const embed = new EmbedBuilder()

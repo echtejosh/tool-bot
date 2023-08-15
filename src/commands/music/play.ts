@@ -1,5 +1,6 @@
 import { createCommand } from '../../app/app';
 import { SlashCommandBuilder } from 'discord.js';
+import { inlineCode } from '../../util';
 
 export const play = createCommand({
     data: new SlashCommandBuilder()
@@ -14,7 +15,7 @@ export const play = createCommand({
     cb: async (app, interaction) => {
         const searchTerm = interaction.options.getString('search_term')!;
 
-        await interaction.reply(`Searching \`${searchTerm}\``);
+        await interaction.reply(`Searching ${inlineCode(searchTerm)}`);
         await app.player.play(interaction, searchTerm);
     },
 });

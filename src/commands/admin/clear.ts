@@ -1,10 +1,8 @@
 import {
-    CommandInteractionOptionResolver,
-    GuildTextBasedChannel,
-    inlineCode,
     SlashCommandBuilder,
     PermissionFlagsBits,
 } from 'discord.js';
+import { inlineCode } from '../../util';
 import { createCommand } from '../../app/app';
 
 export const clear = createCommand({
@@ -36,6 +34,6 @@ export const clear = createCommand({
 
         const { size } = await interaction.channel.bulkDelete(amount);
 
-        await interaction.reply(`\`${size}\` messages removed`);
+        await interaction.reply(`${inlineCode(size)} messages removed`);
     },
 });

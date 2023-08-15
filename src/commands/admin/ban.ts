@@ -1,8 +1,8 @@
 import {
     GuildMember,
     SlashCommandBuilder,
-    inlineCode,
 } from 'discord.js';
+import { inlineCode } from '../../util';
 import { createCommand } from '../../app/app';
 
 export const ban = createCommand({
@@ -29,6 +29,6 @@ export const ban = createCommand({
 
         await member.ban();
 
-        await interaction.reply(`\`${member.user.username}\` has been banned!`);
+        await interaction.reply(`${inlineCode(member.user.username)} has been banned!`);
     },
 });
