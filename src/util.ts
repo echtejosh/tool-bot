@@ -4,18 +4,10 @@ export function delay(ms: number): Promise<any> {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function bold(context: any): string {
-    try {
-        return discord.bold(context.toString());
-    } catch (err) {
-        throw new Error('content of context cannot be set parsed to string');
-    }
+export function bold(context: string | number): string {
+    return discord.bold(context.toString());
 }
 
-export function inlineCode(context: any): string {
-    try {
-        return discord.inlineCode(context.toString());
-    } catch (err) {
-        throw new Error('content of context cannot be set parsed to string');
-    }
+export function inlineCode(context: string | number): string {
+    return discord.inlineCode(context.toString());
 }
