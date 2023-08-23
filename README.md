@@ -3,7 +3,7 @@
 ### Installation
 Clone the repo on your system:
 
-    git clone https://github.com/mochidochi/chocolate
+    git clone https://github.com/mochidochi/mocha
 
 Then, navigate to the directory and install the npm packages:
 
