@@ -36,16 +36,17 @@ const distube = new DisTube(client, {
     },
 });
 
-const audioplayer = new AudioPlayer({
+const audioPlayer = new AudioPlayer({
     client: client,
     distube: distube,
 });
 
 const app = new App({
     client: client,
-    audioplayer: audioplayer,
+    audioPlayer: audioPlayer,
     commands: Object.values(commands),
     events: Object.values(events),
+    cronjobs: Object.values([]),
 });
 
 mongoose.connect(process.env.MONGO_URI!)
