@@ -1,11 +1,11 @@
 import 'dotenv/config';
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
 import { App } from './app/app';
 import { Client, GatewayIntentBits } from 'discord.js';
-import * as commands from './commands/index';
-import * as events from './events/index';
 import { Audioplayer } from './app/audioplayer';
 import { DisTube } from 'distube';
+import * as commands from './commands/index';
+import * as events from './events/index';
 
 const client = new Client({
     intents: [
@@ -36,19 +36,19 @@ const distube = new DisTube(client, {
     },
 });
 
-const player = new Audioplayer({
+const audioplayer = new Audioplayer({
     client: client,
     distube: distube,
 });
 
 const app = new App({
     client: client,
-    player: player,
+    audioplayer: audioplayer,
     commands: Object.values(commands),
     events: Object.values(events),
 });
 
-connect(process.env.MONGO_URI!)
+mongoose.connect(process.env.MONGO_URI!)
     .then(() => console.log('Connected to the database'))
     .catch(() => {
         throw new Error('Unable to establish a connection to the database');
