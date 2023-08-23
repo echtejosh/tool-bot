@@ -1,3 +1,4 @@
+import { GuildMember } from 'discord.js';
 import { createEvent, EventType } from '../../app/app';
 import * as commands from '../../commands';
 
@@ -12,7 +13,7 @@ export const interactionCreate = createEvent({
 
         if (!interaction.inGuild()) {
             await interaction.reply({
-                content: 'I cannot use commands inside dms',
+                content: 'Sorry, usage of commands in dms are disables',
                 ephemeral: true,
             });
 
@@ -31,8 +32,26 @@ export const interactionCreate = createEvent({
             return;
         }
 
+        const member = interaction.member as GuildMember;
+
+        if (
+            command.permissions &&
+            !member.permissions.has(command.permissions)
+        ) {
+            interaction.reply({
+                content: 'Sorry, you have insufficient permissions to use this command',
+                ephemeral: true,
+            });
+
+            return;
+        }
+
         try {
-            await command.cb(app, interaction);
+            if (typeof command.cb === 'function') {
+                await command.cb(app, interaction);
+            } else {
+                console.error('Callback to this command is ignored');
+            }
         } catch (err) {
             console.error(err);
         }

@@ -1,20 +1,16 @@
-import {
-    GuildMember,
-    PermissionFlagsBits,
-    SlashCommandBuilder,
-} from 'discord.js';
+import { GuildMember, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import { inlineCode } from '../../util';
 import { createCommand } from '../../app/app';
 
 export const kick = createCommand({
+    permissions: [
+        PermissionsBitField.Flags.ManageMessages,
+        PermissionsBitField.Flags.KickMembers,
+    ],
+
     data: new SlashCommandBuilder()
         .setName('kick')
         .setDescription('Kick a member from the server')
-        .setDefaultMemberPermissions(
-            PermissionFlagsBits.Administrator |
-            PermissionFlagsBits.ManageMessages |
-            PermissionFlagsBits.KickMembers,
-        )
         .addUserOption((option) => option
             .setName('user')
             .setDescription('Provide a user')

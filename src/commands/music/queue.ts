@@ -3,6 +3,8 @@ import { bold } from '../../util';
 import { EmbedBuilder, Guild, SlashCommandBuilder } from 'discord.js';
 
 export const queue = createCommand({
+    permissions: [],
+
     data: new SlashCommandBuilder()
         .setName('queue')
         .setDescription('Show upcoming songs'),
@@ -20,17 +22,16 @@ export const queue = createCommand({
             return;
         }
 
-        const activeSong = queue.songs[0];
+        const currentSong = queue.songs[0];
         const upcomingSongs = queue.songs.slice(1, 11);
 
-        let description = '';
-        for (const [position, song] of upcomingSongs.entries()) {
-            description += `${bold(position + 1)} - ${song.name} - ${song.formattedDuration} \n\n`;
-        }
+        const description = upcomingSongs
+            .map((song, i) => `${bold(i + 1)} - ${song.name} - ${song.formattedDuration}`)
+            .join('\n\n');
 
         const embed = new EmbedBuilder()
             .setTitle('Now Playing')
-            .setDescription(`${activeSong.name} - ${activeSong.formattedDuration}`)
+            .setDescription(`${currentSong.name} - ${currentSong.formattedDuration}`)
             .setFooter({ text: `${queue.songs.length - 1} song(s) in queue` })
             .addFields({
                 name: 'Next up',

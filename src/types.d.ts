@@ -33,3 +33,14 @@ export type CommandBuilder = Omit<SlashCommandBuilder,
     'addIntegerOption' |
     'addNumberOption'
 >;
+
+export interface LeaderboardEntry {
+    userId: string;
+    points: number;
+    isMember: boolean;
+}
+
+export interface Leaderboard {
+    guildId: string;
+    entries: LeaderboardEntry[],
+}

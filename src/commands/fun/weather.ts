@@ -1,13 +1,11 @@
-import {
-    CommandInteractionOptionResolver,
-    EmbedBuilder,
-    SlashCommandBuilder,
-} from 'discord.js';
+import { CommandInteractionOptionResolver, EmbedBuilder, SlashCommandBuilder } from 'discord.js';
 import { createCommand } from '../../app/app';
 import { load } from 'cheerio';
 import axios from 'axios';
 
 export const weather = createCommand({
+    permissions: [],
+
     data: new SlashCommandBuilder()
         .setName('weather')
         .setDescription('Show weather information of a specified location')

@@ -1,18 +1,16 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-} from 'discord.js';
+import { SlashCommandBuilder, PermissionsBitField } from 'discord.js';
 import { inlineCode } from '../../util';
 import { createCommand } from '../../app/app';
 
 export const clear = createCommand({
+    permissions: [
+        PermissionsBitField.Flags.KickMembers,
+        PermissionsBitField.Flags.BanMembers,
+    ],
+
     data: new SlashCommandBuilder()
         .setName('clear')
         .setDescription('Clear a specified amount of messages')
-        .setDefaultMemberPermissions(
-            PermissionFlagsBits.Administrator |
-            PermissionFlagsBits.ManageMessages,
-        )
         .addNumberOption((option) => option
             .setName('amount')
             .setDescription('Provide an amount')

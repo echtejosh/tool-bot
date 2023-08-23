@@ -3,6 +3,8 @@ import { Guild, SlashCommandBuilder } from 'discord.js';
 import { Queue } from 'distube';
 
 export const skip = createCommand({
+    permissions: [],
+
     data: new SlashCommandBuilder()
         .setName('skip')
         .setDescription('Skip the song that is playing now'),

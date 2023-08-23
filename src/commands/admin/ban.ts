@@ -1,11 +1,13 @@
-import {
-    GuildMember,
-    SlashCommandBuilder,
-} from 'discord.js';
+import { GuildMember, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import { inlineCode } from '../../util';
 import { createCommand } from '../../app/app';
 
 export const ban = createCommand({
+    permissions: [
+        PermissionsBitField.Flags.KickMembers,
+        PermissionsBitField.Flags.BanMembers,
+    ],
+
     data: new SlashCommandBuilder()
         .setName('ban')
         .setDescription('Ban a member from the server')

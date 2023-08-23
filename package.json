@@ -25,6 +25,7 @@
     "dotenv": "^16.3.1",
     "ffmpeg-static": "^5.1.0",
     "libsodium-wrappers": "^0.7.11",
+    "mongoose": "^7.4.3",
     "node": "^20.5.0",
     "opusscript": "^0.1.0",
     "puppeteer": "^21.0.3",

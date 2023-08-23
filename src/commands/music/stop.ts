@@ -2,6 +2,8 @@ import { createCommand } from '../../app/app';
 import { Guild, SlashCommandBuilder } from 'discord.js';
 
 export const stop = createCommand({
+    permissions: [],
+
     data: new SlashCommandBuilder()
         .setName('stop')
         .setDescription('Stop playing the current audio and clear the queue'),

@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { connect } from 'mongoose';
 import { App } from './app/app';
 import { Client, GatewayIntentBits } from 'discord.js';
 import * as commands from './commands/index';
@@ -47,8 +48,16 @@ const app = new App({
     events: Object.values(events),
 });
 
-client.login(process.env.SECRET_TOKEN).then(
-    () => console.log('Logged in'),
-);
+connect(process.env.MONGO_URI!)
+    .then(() => console.log('Connected to the database'))
+    .catch(() => {
+        throw new Error('Unable to establish a connection to the database');
+    });
+
+client.login(process.env.SECRET_TOKEN)
+    .then(() => console.log('Logged in'))
+    .catch(() => {
+        throw new Error('Unable to login');
+    });
 
 app.init();

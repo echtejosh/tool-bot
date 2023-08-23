@@ -25,12 +25,13 @@ export interface Event<
 }
 
 export interface BaseCommand {
+    permissions: bigint[];
     data: CommandBuilder;
-    cb: CommandCallback;
 }
 
 export interface Command extends BaseCommand {
     data: CommandBuilder;
+    cb: CommandCallback;
 }
 
 interface AppOptions {
@@ -59,12 +60,15 @@ export class App {
 
     private registerEvents() {
         for (const { type, name, cb } of this.events) {
-            if (type === EventType.Discord) {
-                this.client.on(name, (...args) => cb(this, ...args));
-            } else if (type === EventType.Distube) {
-                this.player.distube.on(name, (...args: any[]) => cb(this, ...args));
-            } else if (type === EventType.Player) {
-                this.player.emitter.on(name, (...args) => cb(this, ...args));
+            switch (type) {
+                case EventType.Discord:
+                    this.client.on(name, (...args) => cb(this, ...args));
+                    break;
+                case EventType.Distube:
+                    this.player.distube.on(name, (...args: any[]) => cb(this, ...args));
+                    break;
+                case EventType.Player:
+                    this.player.emitter.on(name, (...args) => cb(this, ...args));
             }
         }
     }
@@ -84,4 +88,12 @@ export function createEvent<
 
 export function createCommand(command: Command) {
     return command;
+}
+
+export async function getUser(client: Client, userId: string) {
+    try {
+        return await client.users.fetch(userId, { cache: true });
+    } catch {
+        return null;
+    }
 }

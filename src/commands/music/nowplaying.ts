@@ -2,6 +2,8 @@ import { createCommand } from '../../app/app';
 import { EmbedBuilder, Guild, SlashCommandBuilder } from 'discord.js';
 
 export const nowplaying = createCommand({
+    permissions: [],
+
     data: new SlashCommandBuilder()
         .setName('nowplaying')
         .setDescription('Show information of the song that is playing'),
@@ -19,26 +21,26 @@ export const nowplaying = createCommand({
             return;
         }
 
-        const activeSong = queue.songs[0];
+        const currentSong = queue.songs[0];
         const upcomingSong = queue.songs[1];
 
         const embed = new EmbedBuilder()
-            .setTitle(activeSong.name!)
+            .setTitle(currentSong.name!)
             .setTimestamp()
             .setFields([
                 {
                     name: 'Artist',
-                    value: activeSong.uploader.name!,
+                    value: currentSong.uploader.name!,
                     inline: true,
                 },
                 {
                     name: 'Duration',
-                    value: `${queue.formattedCurrentTime}/${activeSong.formattedDuration}`,
+                    value: `${queue.formattedCurrentTime}/${currentSong.formattedDuration}`,
                     inline: true,
                 },
                 {
                     name: 'Requested by',
-                    value: activeSong.user!.tag,
+                    value: currentSong.user!.tag,
                     inline: true,
                 },
                 {
