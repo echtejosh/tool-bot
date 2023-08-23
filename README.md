@@ -1,4 +1,4 @@
-# chocolate
+# Chocolate
 Discord bot made using TypeScript.
 
 ## Setup
