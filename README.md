@@ -1,7 +1,4 @@
-# Chocolate
-Discord bot made using TypeScript.
-
-## Setup
+## Quick setup &mdash; for beginners
 
 ### Installation
 Clone the repo on your system
