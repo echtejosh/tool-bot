@@ -1,5 +1,6 @@
 export * from './travia/echo';
 export * from './travia/weather';
+export * from './travia/8ball';
 export * from './travia/leaderboard';
 export * from './admin/clear';
 export * from './admin/kick';
