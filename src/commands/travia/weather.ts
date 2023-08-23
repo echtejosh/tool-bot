@@ -70,7 +70,9 @@ export const weather = createCommand({
                     },
                 );
 
-            await interaction.reply({ embeds: [embed] });
+            await interaction.reply({
+                embeds: [embed],
+            });
         } catch (err) {
             await interaction.reply({
                 content: 'Unable to fetch weather information, try again',
