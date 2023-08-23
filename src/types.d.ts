@@ -1,16 +1,10 @@
-import { ClientEvents, ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ClientEvents, ChatInputCommandInteraction, SlashCommandBuilder, Awaitable } from 'discord.js';
 import { App, Events, EventType } from './app/app';
 
 export type DiscordEvents = ClientEvents;
 
 export interface PlayerEvents {
     error: [discord.CommandInteraction, Error];
-}
-
-export enum VoiceChannelState {
-    Join = 'join',
-    Leave = 'leave',
-    Moved = 'moved',
 }
 
 type EventCallback<

@@ -1,7 +1,8 @@
-import { Client } from 'discord.js';
+import { Awaitable, Client } from 'discord.js';
 import { CommandBuilder, CommandCallback, DiscordEvents, EventCallback, PlayerEvents } from '../types';
 import { DisTubeEvents } from 'distube';
-import { Audioplayer } from './audioplayer';
+import { AudioPlayer } from './audioPlayer';
+import * as cron from 'node-cron';
 
 export enum EventType {
     Discord = 'discord',
@@ -34,28 +35,39 @@ export interface Command extends BaseCommand {
     cb: CommandCallback;
 }
 
+export interface Cronjob {
+    schedule: string;
+    cb: CronCallback;
+}
+
+export type CronCallback = (app: App, cron: Cronjob) => Awaitable<void>;
+
 interface AppOptions {
     client: Client;
-    audioplayer: Audioplayer;
+    audioPlayer: AudioPlayer;
     commands: Command[];
     events: Event<any, any>[];
+    cronjobs: Cronjob[];
 }
 
 export class App {
     public readonly client: Client;
-    public readonly audioplayer: Audioplayer;
+    public readonly audioPlayer: AudioPlayer;
     public readonly commands: Command[];
     public readonly events: Event<any, any>[];
+    public readonly cronjobs: Cronjob[];
 
     constructor(options: AppOptions) {
         this.client = options.client;
-        this.audioplayer = options.audioplayer;
+        this.audioPlayer = options.audioPlayer;
         this.commands = options.commands;
         this.events = options.events;
+        this.cronjobs = options.cronjobs;
     }
 
     public init() {
         this.registerEvents();
+        this.registerCronjobs();
     }
 
     private registerEvents() {
@@ -65,12 +77,18 @@ export class App {
                     this.client.on(name, (...args) => cb(this, ...args));
                     break;
                 case EventType.Distube:
-                    this.audioplayer.distube.on(name, (...args: any[]) => cb(this, ...args));
+                    this.audioPlayer.distube.on(name, (...args: any[]) => cb(this, ...args));
                     break;
                 case EventType.Audioplayer:
-                    this.audioplayer.emitter.on(name, (...args) => cb(this, ...args));
+                    this.audioPlayer.emitter.on(name, (...args) => cb(this, ...args));
                     break;
             }
+        }
+    }
+
+    private registerCronjobs() {
+        for (const cronjobs of this.cronjobs) {
+            cron.schedule(cronjobs.schedule, () => cronjobs.cb(this, cronjobs));
         }
     }
 
@@ -89,4 +107,8 @@ export function createEvent<
 
 export function createCommand(command: Command) {
     return command;
+}
+
+export function createCronjob(cronjob: Cronjob) {
+    return cronjob;
 }

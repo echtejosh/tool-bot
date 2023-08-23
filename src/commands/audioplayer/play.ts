@@ -18,6 +18,6 @@ export const play = createCommand({
         const searchTerm = interaction.options.getString('search_term')!;
 
         await interaction.reply(`Searching ${inlineCode(searchTerm)}`);
-        await app.audioplayer.play(interaction, searchTerm);
+        await app.audioPlayer.play(interaction, searchTerm);
     },
 });

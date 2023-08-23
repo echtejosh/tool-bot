@@ -7,7 +7,7 @@ export interface AudioplayerOptions {
     distube: DisTube;
 }
 
-export class Audioplayer {
+export class AudioPlayer {
     public readonly client: Client;
     public readonly distube: DisTube;
     public readonly emitter: EventEmitter = new EventEmitter();

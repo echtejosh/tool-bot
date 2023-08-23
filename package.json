@@ -27,10 +27,14 @@
     "libsodium-wrappers": "^0.7.11",
     "mongoose": "^7.4.3",
     "node": "^20.5.0",
+    "node-cron": "^3.0.2",
     "opusscript": "^0.1.0",
     "puppeteer": "^21.0.3",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.8"
   }
 }
