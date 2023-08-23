@@ -4,7 +4,7 @@ import { App } from './app/app';
 import { Client, GatewayIntentBits } from 'discord.js';
 import * as commands from './commands/index';
 import * as events from './events/index';
-import { Player } from './app/player';
+import { Audioplayer } from './app/audioplayer';
 import { DisTube } from 'distube';
 
 const client = new Client({
@@ -36,7 +36,7 @@ const distube = new DisTube(client, {
     },
 });
 
-const player = new Player({
+const player = new Audioplayer({
     client: client,
     distube: distube,
 });

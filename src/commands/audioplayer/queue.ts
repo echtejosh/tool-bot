@@ -11,7 +11,7 @@ export const queue = createCommand({
 
     cb: async (app, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = app.player.distube.getQueue(guild);
+        const queue = app.audioplayer.distube.getQueue(guild);
 
         if (!queue) {
             await interaction.reply({

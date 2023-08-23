@@ -2,7 +2,7 @@ import { createEvent, EventType } from '../../app/app';
 import { delay } from '../../util';
 
 export const error = createEvent({
-    type: EventType.Player,
+    type: EventType.Audioplayer,
     name: 'error',
 
     cb: async (app, interaction) => {

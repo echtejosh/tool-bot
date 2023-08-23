@@ -1,18 +1,18 @@
 import { Client } from 'discord.js';
 import { CommandBuilder, CommandCallback, DiscordEvents, EventCallback, PlayerEvents } from '../types';
 import { DisTubeEvents } from 'distube';
-import { Player } from './player';
+import { Audioplayer } from './audioplayer';
 
 export enum EventType {
     Discord = 'discord',
     Distube = 'distube',
-    Player = 'player',
+    Audioplayer = 'audioplayer',
 }
 
 export interface Events {
     [EventType.Discord]: DiscordEvents;
     [EventType.Distube]: DisTubeEvents;
-    [EventType.Player]: PlayerEvents;
+    [EventType.Audioplayer]: PlayerEvents;
 }
 
 export interface Event<
@@ -36,20 +36,20 @@ export interface Command extends BaseCommand {
 
 interface AppOptions {
     client: Client;
-    player: Player;
+    audioplayer: Audioplayer;
     commands: Command[];
     events: Event<any, any>[];
 }
 
 export class App {
     public readonly client: Client;
-    public readonly player: Player;
+    public readonly audioplayer: Audioplayer;
     public readonly commands: Command[];
     public readonly events: Event<any, any>[];
 
     constructor(options: AppOptions) {
         this.client = options.client;
-        this.player = options.player;
+        this.audioplayer = options.audioplayer;
         this.commands = options.commands;
         this.events = options.events;
     }
@@ -65,10 +65,10 @@ export class App {
                     this.client.on(name, (...args) => cb(this, ...args));
                     break;
                 case EventType.Distube:
-                    this.player.distube.on(name, (...args: any[]) => cb(this, ...args));
+                    this.audioplayer.distube.on(name, (...args: any[]) => cb(this, ...args));
                     break;
-                case EventType.Player:
-                    this.player.emitter.on(name, (...args) => cb(this, ...args));
+                case EventType.Audioplayer:
+                    this.audioplayer.emitter.on(name, (...args) => cb(this, ...args));
             }
         }
     }
@@ -88,12 +88,4 @@ export function createEvent<
 
 export function createCommand(command: Command) {
     return command;
-}
-
-export async function getUser(client: Client, userId: string) {
-    try {
-        return await client.users.fetch(userId, { cache: true });
-    } catch {
-        return null;
-    }
 }
