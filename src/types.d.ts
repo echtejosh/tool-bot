@@ -7,6 +7,12 @@ export interface PlayerEvents {
     error: [discord.CommandInteraction, Error];
 }
 
+export enum VoiceChannelState {
+    Join = 'join',
+    Leave = 'leave',
+    Moved = 'moved',
+}
+
 type EventCallback<
     T extends EventType,
     U extends keyof Events[T]

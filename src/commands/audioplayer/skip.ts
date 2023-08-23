@@ -11,7 +11,16 @@ export const skip = createCommand({
 
     cb: async (app, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = app.audioplayer.distube.getQueue(guild) as Queue;
+        const queue = app.audioplayer.distube.getQueue(guild);
+
+        if (!queue) {
+            await interaction.reply({
+                content: 'No songs are playing right now',
+                ephemeral: true,
+            });
+
+            return;
+        }
 
         if (queue.songs.length <= 1) {
             await queue.stop();

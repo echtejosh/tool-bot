@@ -1,6 +1,5 @@
 import { EmbedBuilder, Guild, GuildMember, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import { createCommand } from '../../app/app';
-import * as Leaderboard from '../../repositories/leaderboard';
 import LeaderboardModel from '../../models/leaderboard';
 
 export const leaderboard = createCommand({
@@ -52,18 +51,29 @@ export const leaderboard = createCommand({
                 await interaction.reply('Leaderboard entry has been successfully removed');
                 break;
             case 'view':
-                const leaderboard = await Leaderboard.get(guild.id);
+                const leaderboard = await LeaderboardModel
+                    .find({ guildId: guild.id })
+                    .sort({ points: -1 })
+                    .limit(10)
+                    .exec();
 
                 const members = [];
                 const points = [];
 
-                for (const { userId, points: _points } of leaderboard.entries) {
-                    const user = await app.client.users.fetch(userId, {
+                for (const { userId, points: _points } of leaderboard) {
+                    if (!userId) {
+                        continue;
+                    }
+
+                    const _member = await app.client.users.fetch(userId, {
                         cache: true,
                     });
 
-                    if (user && _points > 0) {
-                        members.push(user.tag);
+                    if (
+                        _member &&
+                        _points > 0
+                    ) {
+                        members.push(_member.tag);
                         points.push(_points);
                     }
                 }

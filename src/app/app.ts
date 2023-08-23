@@ -69,6 +69,7 @@ export class App {
                     break;
                 case EventType.Audioplayer:
                     this.audioplayer.emitter.on(name, (...args) => cb(this, ...args));
+                    break;
             }
         }
     }
