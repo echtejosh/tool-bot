@@ -14,7 +14,6 @@ export const eightball = createCommand({
         ),
 
     cb: async (app, interaction) => {
-        // Affirmative answers
         const list1 = [
             'It is certain',
             'It is decidedly so',
@@ -28,7 +27,6 @@ export const eightball = createCommand({
             'Signs point to yes'
         ];
 
-        // Non-committal answers
         const list2 = [
             'Reply hazy, try again',
             'Ask again later',
@@ -37,7 +35,6 @@ export const eightball = createCommand({
             'Concentrate and ask again'
         ];
 
-        // Negative answers
         const list3 = [
             'Don\'t count on it',
             'My reply is no',
