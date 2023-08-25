@@ -32,20 +32,6 @@ export const interactionCreate = createEvent({
             return;
         }
 
-        const member = interaction.member as GuildMember;
-
-        if (
-            command.permissions &&
-            !member.permissions.has(command.permissions)
-        ) {
-            interaction.reply({
-                content: 'Sorry, you have insufficient permissions to use this command',
-                ephemeral: true,
-            });
-
-            return;
-        }
-
         try {
             if (typeof command.cb === 'function') {
                 await command.cb(app, interaction);

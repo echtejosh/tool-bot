@@ -2,8 +2,6 @@ import { GuildMember, SlashCommandBuilder, PermissionFlagsBits } from 'discord.j
 import { createCommand } from '../../app/app';
 
 export const echo = createCommand({
-    permissions: [],
-
     data: new SlashCommandBuilder()
         .setName('echo')
         .setDescription('Repeats a given message')

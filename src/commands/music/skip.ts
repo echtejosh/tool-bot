@@ -1,12 +1,11 @@
 import { createCommand } from '../../app/app';
 import { Guild, SlashCommandBuilder } from 'discord.js';
+import { Queue } from 'distube';
 
-export const stop = createCommand({
-    permissions: [],
-
+export const skip = createCommand({
     data: new SlashCommandBuilder()
-        .setName('stop')
-        .setDescription('Stop playing the current audio and clear the queue'),
+        .setName('skip')
+        .setDescription('Skip the song that is playing now'),
 
     cb: async (app, interaction) => {
         const guild = interaction.guild as Guild;
@@ -21,8 +20,12 @@ export const stop = createCommand({
             return;
         }
 
-        await queue.stop();
+        if (queue.songs.length <= 1) {
+            await queue.stop();
+        } else {
+            await queue.skip();
+        }
 
-        await interaction.reply('Stopping playback and clearing the queue');
+        await interaction.reply('The current song has been skipped');
     },
 });

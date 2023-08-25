@@ -3,8 +3,6 @@ import { SlashCommandBuilder } from 'discord.js';
 import { inlineCode } from '../../util';
 
 export const play = createCommand({
-    permissions: [],
-
     data: new SlashCommandBuilder()
         .setName('play')
         .setDescription('Play a song')

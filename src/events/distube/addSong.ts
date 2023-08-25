@@ -35,8 +35,6 @@ export const addSong = createEvent({
                 },
             ]);
 
-        queue.textChannel!.send({
-            embeds: [embed],
-        });
+        queue.textChannel!.send({ embeds: [embed] });
     },
 });

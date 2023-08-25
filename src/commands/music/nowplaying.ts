@@ -2,8 +2,6 @@ import { createCommand } from '../../app/app';
 import { EmbedBuilder, Guild, SlashCommandBuilder } from 'discord.js';
 
 export const nowplaying = createCommand({
-    permissions: [],
-
     data: new SlashCommandBuilder()
         .setName('nowplaying')
         .setDescription('Show information of the song that is playing'),

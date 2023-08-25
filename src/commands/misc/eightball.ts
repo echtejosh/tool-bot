@@ -1,11 +1,9 @@
-import { GuildMember, SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
+import { SlashCommandBuilder } from 'discord.js';
 import { createCommand } from '../../app/app';
 
 export const eightball = createCommand({
-    permissions: [],
-
     data: new SlashCommandBuilder()
-        .setName('8ball')
+        .setName('eightball')
         .setDescription('Answers a given question with a random answer')
         .addStringOption((option) => option
             .setName('question')
@@ -24,7 +22,7 @@ export const eightball = createCommand({
             'Most likely',
             'Outlook good',
             'Yes',
-            'Signs point to yes'
+            'Signs point to yes',
         ];
 
         const list2 = [
@@ -32,7 +30,7 @@ export const eightball = createCommand({
             'Ask again later',
             'Better not tell you now',
             'Cannot predict now',
-            'Concentrate and ask again'
+            'Concentrate and ask again',
         ];
 
         const list3 = [
@@ -40,7 +38,7 @@ export const eightball = createCommand({
             'My reply is no',
             'My sources say no',
             'Outlook not so good',
-            'Very doubtful'
+            'Very doubtful',
         ];
 
         const answers = list1.concat(list2, list3);

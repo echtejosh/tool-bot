@@ -26,7 +26,6 @@ export interface Event<
 }
 
 export interface BaseCommand {
-    permissions: bigint[];
     data: CommandBuilder;
 }
 

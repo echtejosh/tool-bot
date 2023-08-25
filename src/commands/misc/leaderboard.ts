@@ -3,8 +3,6 @@ import { createCommand } from '../../app/app';
 import LeaderboardModel from '../../models/leaderboard';
 
 export const leaderboard = createCommand({
-    permissions: [],
-
     data: new SlashCommandBuilder()
         .setName('leaderboard')
         .setDescription('Shows a leaderboard of active users in this server')

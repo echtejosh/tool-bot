@@ -3,14 +3,13 @@ import { inlineCode } from '../../util';
 import { createCommand } from '../../app/app';
 
 export const kick = createCommand({
-    permissions: [
-        PermissionsBitField.Flags.ManageMessages,
-        PermissionsBitField.Flags.KickMembers,
-    ],
-
     data: new SlashCommandBuilder()
         .setName('kick')
         .setDescription('Kick a member from the server')
+        .setDefaultMemberPermissions(
+            PermissionsBitField.Flags.ManageMessages |
+            PermissionsBitField.Flags.KickMembers,
+        )
         .addUserOption((option) => option
             .setName('user')
             .setDescription('Provide a user')

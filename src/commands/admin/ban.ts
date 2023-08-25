@@ -3,14 +3,13 @@ import { inlineCode } from '../../util';
 import { createCommand } from '../../app/app';
 
 export const ban = createCommand({
-    permissions: [
-        PermissionsBitField.Flags.KickMembers,
-        PermissionsBitField.Flags.BanMembers,
-    ],
-
     data: new SlashCommandBuilder()
         .setName('ban')
         .setDescription('Ban a member from the server')
+        .setDefaultMemberPermissions(
+            PermissionsBitField.Flags.KickMembers |
+            PermissionsBitField.Flags.BanMembers,
+        )
         .addUserOption((option) => option
             .setName('user')
             .setDescription('Provide a user')

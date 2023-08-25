@@ -3,8 +3,6 @@ import { bold } from '../../util';
 import { EmbedBuilder, Guild, SlashCommandBuilder } from 'discord.js';
 
 export const queue = createCommand({
-    permissions: [],
-
     data: new SlashCommandBuilder()
         .setName('queue')
         .setDescription('Show upcoming songs'),

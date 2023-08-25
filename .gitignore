@@ -100,9 +100,9 @@ dist
 
 # Gatsby files
 .cache/
-# Comment in the travia line in if your project uses Gatsby and not Next.js
+# Comment in the misc line in if your project uses Gatsby and not Next.js
 # https://nextjs.org/blog/next-9-1#public-directory-support
-# travia
+# misc
 
 # vuepress build output
 .vuepress/dist
