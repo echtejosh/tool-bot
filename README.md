@@ -4,8 +4,6 @@ Mocha is a multi-purpose server management client for Discord. For moderating se
 
 Make sure you have the dependencies needed to run this. See [here](https://discordjs.guide/#before-you-begin) for the docs.
 
-Some features may be work-in-progress.
-
 ## Quick setup &mdash; for beginners
 
 ### Installation
