@@ -3,7 +3,7 @@ import { App, Events, EventType } from './app/app';
 
 export type DiscordEvents = ClientEvents;
 
-export interface PlayerEvents {
+export interface AudioPlayerEvents {
     error: [discord.CommandInteraction, Error];
 }
 

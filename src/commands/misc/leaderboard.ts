@@ -41,10 +41,10 @@ export const leaderboard = createCommand({
 
                 const memberOption = interaction.options.getMember('member') as GuildMember;
 
-                LeaderboardModel.findOneAndDelete({
+                await LeaderboardModel.findOneAndDelete({
                     guildId: guild.id,
                     userId: memberOption.id,
-                });
+                }).exec();
 
                 await interaction.reply('Leaderboard entry has been successfully removed');
                 break;

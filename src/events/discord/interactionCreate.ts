@@ -1,4 +1,3 @@
-import { GuildMember } from 'discord.js';
 import { createEvent, EventType } from '../../app/app';
 import * as commands from '../../commands';
 
