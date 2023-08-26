@@ -18,6 +18,8 @@ Then, navigate to the directory and install the npm packages:
 ### Credentials
 Navigate to `.env.example` and replace the placeholders, after that rename the file to `.env`
 
+Mongoose requires Atlas. See [here](https://www.mongodb.com/docs/manual/reference/connection-string/) for more information.
+
 ### Usage
 To start the project:
 
