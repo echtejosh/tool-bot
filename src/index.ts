@@ -46,7 +46,6 @@ const app = new App({
     audioPlayer: audioPlayer,
     commands: Object.values(commands),
     events: Object.values(events),
-    cronjobs: Object.values([]),
 });
 
 mongoose.connect(process.env.MONGO_URI!)
