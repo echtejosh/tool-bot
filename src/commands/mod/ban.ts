@@ -17,9 +17,9 @@ export const ban = createCommand({
         ),
 
     cb: async (app, interaction) => {
-        const member = interaction.options.getMember('user') as GuildMember;
+        const memberOption = interaction.options.getMember('user') as GuildMember;
 
-        if (!member.bannable) {
+        if (!memberOption.bannable) {
             await interaction.reply({
                 content: 'This member cannot be banned',
                 ephemeral: true,
@@ -28,8 +28,8 @@ export const ban = createCommand({
             return;
         }
 
-        await member.ban();
+        await memberOption.ban();
 
-        await interaction.reply(`${inlineCode(member.user.username)} has been banned!`);
+        await interaction.reply(`${inlineCode(memberOption.user.username)} has been banned!`);
     },
 });

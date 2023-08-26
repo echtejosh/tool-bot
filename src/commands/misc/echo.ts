@@ -17,18 +17,18 @@ export const echo = createCommand({
 
     cb: async (app, interaction) => {
         const member = interaction.member as GuildMember;
-        const message = interaction.options.getString('message');
+        const messageOption = interaction.options.getString('message');
 
         if (
-            !message ||
+            !messageOption ||
             !interaction.channel
         ) {
             return;
         }
 
-        const hidden = interaction.options.getBoolean('hidden');
+        const hiddenOption = interaction.options.getBoolean('hidden');
 
-        if (hidden) {
+        if (hiddenOption) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator)) {
                 await interaction.reply({
                     content: 'You do not have the necessary permissions to use this command',
@@ -41,9 +41,9 @@ export const echo = createCommand({
             await interaction.deferReply();
             await interaction.deleteReply();
 
-            await interaction.channel.send(message);
+            await interaction.channel.send(messageOption);
         }
 
-        await interaction.reply(message);
+        await interaction.reply(messageOption);
     },
 });

@@ -2,7 +2,7 @@ import { Client, CommandInteraction, GuildMember, TextChannel, VoiceChannel } fr
 import { DisTube } from 'distube';
 import { EventEmitter } from 'events';
 
-export interface AudioplayerOptions {
+export interface AudioPlayerOptions {
     client: Client;
     distube: DisTube;
 }
@@ -12,12 +12,12 @@ export class AudioPlayer {
     public readonly distube: DisTube;
     public readonly emitter: EventEmitter = new EventEmitter();
 
-    constructor(options: AudioplayerOptions) {
+    constructor(options: AudioPlayerOptions) {
         this.client = options.client;
         this.distube = options.distube;
     }
 
-    public async play(interaction: CommandInteraction, query: string) {
+    public async play(interaction: CommandInteraction, query: string, skip: boolean = false) {
         const member = interaction.member as GuildMember;
         const textChannel = interaction.channel as TextChannel;
         const voiceChannel = member.voice.channel as VoiceChannel;
@@ -26,6 +26,7 @@ export class AudioPlayer {
             await this.distube.play(voiceChannel, query, {
                 textChannel,
                 member,
+                skip,
             });
         } catch (err) {
             this.emitter.emit('error', interaction, err);

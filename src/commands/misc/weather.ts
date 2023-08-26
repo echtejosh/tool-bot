@@ -14,10 +14,10 @@ export const weather = createCommand({
         ),
 
     cb: async (client, interaction) => {
-        const searchTerm = interaction.options.getString('search_term')!;
+        const searchTermOption = interaction.options.getString('search_term')!;
 
         try {
-            const response = await axios.get(`http://weather.service.msn.com/find.aspx?src=outlook&weadegreetype=C&culture=en-US&weasearchstr=${encodeURI(searchTerm)}`, {
+            const response = await axios.get(`http://weather.service.msn.com/find.aspx?src=outlook&weadegreetype=C&culture=en-US&weasearchstr=${encodeURI(searchTermOption)}`, {
                 timeout: 2000,
             });
 

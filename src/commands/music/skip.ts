@@ -1,6 +1,5 @@
 import { createCommand } from '../../app/app';
 import { Guild, SlashCommandBuilder } from 'discord.js';
-import { Queue } from 'distube';
 
 export const skip = createCommand({
     data: new SlashCommandBuilder()

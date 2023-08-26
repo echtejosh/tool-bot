@@ -19,17 +19,17 @@ export const clear = createCommand({
         ),
 
     cb: async (app, interaction) => {
-        const amount = interaction.options.getNumber('amount');
+        const amountOption = interaction.options.getNumber('amount');
 
         if (
-            !amount ||
+            !amountOption ||
             !interaction.channel ||
             !interaction.inGuild()
         ) {
             return;
         }
 
-        const { size } = await interaction.channel.bulkDelete(amount);
+        const { size } = await interaction.channel.bulkDelete(amountOption);
 
         await interaction.reply(`${inlineCode(size)} messages removed`);
     },

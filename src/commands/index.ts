@@ -10,3 +10,6 @@ export * from './music/queue';
 export * from './music/nowplaying';
 export * from './music/stop';
 export * from './music/skip';
+export * from './music/shuffle';
+export * from './music/pause';
+export * from './music/movetop';

@@ -1,29 +1,25 @@
 import { createCommand } from '../../app/app';
 import { Guild, GuildMember, SlashCommandBuilder } from 'discord.js';
-import { inlineCode } from '../../util';
 
-export const play = createCommand({
+export const shuffle = createCommand({
     data: new SlashCommandBuilder()
-        .setName('play')
-        .setDescription('Play a song')
-        .addStringOption((option) => option
-            .setName('search_term')
-            .setDescription('Play any song by providing a search term or a url')
-            .setRequired(true),
-        )
-        .addBooleanOption((option) => option
-            .setName('skip')
-            .setDescription('Skip to this song')
-            .setRequired(true),
-        ),
+        .setName('shuffle')
+        .setDescription('Reorders the position of songs within the queue randomly'),
 
     cb: async (app, interaction) => {
-        const searchTermOption = interaction.options.getString('search_term')!;
-        const skipOption = interaction.options.getBoolean('skip')!;
-
         const guild = interaction.guild as Guild;
+        const queue = app.audioPlayer.distube.getQueue(guild);
         const member = interaction.member as GuildMember;
         const voiceChannel = member.voice.channel;
+
+        if (!queue) {
+            await interaction.reply({
+                content: 'No songs are playing right now',
+                ephemeral: true,
+            });
+
+            return;
+        }
 
         if (!voiceChannel) {
             await interaction.reply({
@@ -46,8 +42,8 @@ export const play = createCommand({
             return;
         }
 
-        await interaction.reply(`Searching ${inlineCode(searchTermOption)}`);
+        await queue.shuffle();
 
-        await app.audioPlayer.play(interaction, searchTermOption, skipOption);
+        await interaction.reply('Queue has been randomized');
     },
 });
