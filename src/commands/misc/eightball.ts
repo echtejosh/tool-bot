@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
 import { createCommand } from '../../app/app';
 
 export const eightball = createCommand({
@@ -12,6 +12,8 @@ export const eightball = createCommand({
         ),
 
     cb: async (app, interaction) => {
+        const questionOption = interaction.options.getString('question')!;
+
         const list1 = [
             'It is certain',
             'It is decidedly so',
@@ -44,6 +46,11 @@ export const eightball = createCommand({
         const answers = list1.concat(list2, list3);
         const index = Math.floor(Math.random() * answers.length);
 
-        await interaction.reply(answers[index]);
+        const embed = new EmbedBuilder({
+            title: `Question: ${questionOption}`,
+            description: `Answer: ${answers[index]}`,
+        });
+
+        await interaction.reply({ embeds: [embed] });
     },
 });
