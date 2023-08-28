@@ -2,7 +2,7 @@ import { Client, CommandInteraction, GuildMember, TextChannel, VoiceChannel } fr
 import { DisTube } from 'distube';
 import { EventEmitter } from 'events';
 
-export interface AudioPlayerOptions {
+export interface PlayerOptions {
     client: Client;
     distube: DisTube;
 }
@@ -12,7 +12,7 @@ export class Player {
     public readonly distube: DisTube;
     public readonly emitter: EventEmitter = new EventEmitter();
 
-    constructor(options: AudioPlayerOptions) {
+    constructor(options: PlayerOptions) {
         this.client = options.client;
         this.distube = options.distube;
     }
