@@ -13,7 +13,7 @@ export const movetop = createCommand({
 
     cb: async (app, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = app.audioPlayer.distube.getQueue(guild);
+        const queue = app.player.distube.getQueue(guild);
         const member = interaction.member as GuildMember;
         const voiceChannel = member.voice.channel;
         const position = interaction.options.getNumber('position')!;

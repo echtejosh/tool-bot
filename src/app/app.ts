@@ -7,18 +7,18 @@ import {
     AudioPlayerEvents,
 } from '../types';
 import { DisTubeEvents } from 'distube';
-import { AudioPlayer } from './audioPlayer';
+import { Player } from './player';
 
 export enum EventType {
     Discord = 'discord',
     Distube = 'distube',
-    AudioPlayer = 'audioplayer',
+    Player = 'audioplayer',
 }
 
 export interface Events {
     [EventType.Discord]: DiscordEvents;
     [EventType.Distube]: DisTubeEvents;
-    [EventType.AudioPlayer]: AudioPlayerEvents;
+    [EventType.Player]: AudioPlayerEvents;
 }
 
 export interface Event<
@@ -41,20 +41,20 @@ export interface Command extends BaseCommand {
 
 interface AppOptions {
     client: Client;
-    audioPlayer: AudioPlayer;
+    player: Player;
     commands: Command[];
     events: Event<any, any>[];
 }
 
 export class App {
     public readonly client: Client;
-    public readonly audioPlayer: AudioPlayer;
+    public readonly player: Player;
     public readonly commands: Command[];
     public readonly events: Event<any, any>[];
 
     constructor(options: AppOptions) {
         this.client = options.client;
-        this.audioPlayer = options.audioPlayer;
+        this.player = options.player;
         this.commands = options.commands;
         this.events = options.events;
     }
@@ -70,10 +70,10 @@ export class App {
                     this.client.on(name, (...args) => cb(this, ...args));
                     break;
                 case EventType.Distube:
-                    this.audioPlayer.distube.on(name, (...args: any[]) => cb(this, ...args));
+                    this.player.distube.on(name, (...args: any[]) => cb(this, ...args));
                     break;
-                case EventType.AudioPlayer:
-                    this.audioPlayer.emitter.on(name, (...args) => cb(this, ...args));
+                case EventType.Player:
+                    this.player.emitter.on(name, (...args) => cb(this, ...args));
                     break;
             }
         }

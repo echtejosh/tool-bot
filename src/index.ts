@@ -2,7 +2,7 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 import { App } from './app/app';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { AudioPlayer } from './app/audioPlayer';
+import { Player } from './app/player';
 import { DisTube } from 'distube';
 import * as commands from './commands/index';
 import * as events from './events/index';
@@ -36,14 +36,14 @@ const distube = new DisTube(client, {
     },
 });
 
-const audioPlayer = new AudioPlayer({
+const audioPlayer = new Player({
     client: client,
     distube: distube,
 });
 
 const app = new App({
     client: client,
-    audioPlayer: audioPlayer,
+    player: audioPlayer,
     commands: Object.values(commands),
     events: Object.values(events),
 });

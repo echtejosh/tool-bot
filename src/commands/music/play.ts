@@ -48,6 +48,6 @@ export const play = createCommand({
 
         await interaction.reply(`Searching ${inlineCode(searchTermOption)}`);
 
-        await app.audioPlayer.play(interaction, searchTermOption, skipOption);
+        await app.player.play(interaction, searchTermOption, skipOption);
     },
 });
