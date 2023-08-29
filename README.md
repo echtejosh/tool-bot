@@ -8,12 +8,14 @@ Make sure you have the dependencies needed to run this. See [here](https://disco
 
 ### Installation
 
-> **IMPORTANT**
-Make sure you install **FFmpeg** on your system before continuing.
-
 Clone the repo on your system:
 
     git clone https://github.com/mochidochi/mocha
+
+
+> **IMPORTANT**
+Make sure you install **FFmpeg** on your system before continuing.
+
 
 Then, navigate to the directory and install the npm packages:
 
