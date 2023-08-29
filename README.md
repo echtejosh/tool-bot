@@ -15,7 +15,7 @@ Clone the repo on your system:
 Then, navigate to the directory and install the NPM packages:
 
 > **IMPORTANT**
-Make sure you install **FFmpeg** on your system before continuing.
+Make sure you install [FFmpeg](https://ffmpeg.org/) on your system before continuing.
 
 
     npm install
