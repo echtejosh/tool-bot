@@ -7,6 +7,10 @@ Make sure you have the dependencies needed to run this. See [here](https://disco
 ## Quick setup &mdash; for beginners
 
 ### Installation
+
+> **Warning**
+Make sure you install **FFmpeg** on your system before continuing.
+
 Clone the repo on your system:
 
     git clone https://github.com/mochidochi/mocha

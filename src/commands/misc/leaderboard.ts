@@ -26,11 +26,7 @@ export const leaderboard = createCommand({
 
         switch (interaction.options.getSubcommand()) {
             case 'remove':
-                const permissions = [
-                    PermissionsBitField.Flags.Administrator,
-                ];
-
-                if (!member.permissions.has(permissions)) {
+                if (!member.permissions.has(PermissionsBitField.Flags.Administrator)) {
                     await interaction.reply({
                         content: 'Sorry, you have insufficient permissions to use this command',
                         ephemeral: true,
@@ -58,21 +54,21 @@ export const leaderboard = createCommand({
                 const members = [];
                 const points = [];
 
-                for (const { userId, points: _points } of leaderboard) {
-                    if (!userId) {
+                for (const entry of leaderboard) {
+                    if (!entry.userId) {
                         continue;
                     }
 
-                    const _member = await app.client.users.fetch(userId, {
+                    const member = await app.client.users.fetch(entry.userId, {
                         cache: true,
                     });
 
                     if (
-                        _member &&
-                        _points > 0
+                        member &&
+                        entry.points > 0
                     ) {
-                        members.push(_member.tag);
-                        points.push(_points);
+                        members.push(member.tag);
+                        points.push(entry.points);
                     }
                 }
 
