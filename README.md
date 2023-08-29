@@ -8,7 +8,7 @@ Make sure you have the dependencies needed to run this. See [here](https://disco
 
 ### Installation
 
-> **Warning**
+> **IMPORTANT**
 Make sure you install **FFmpeg** on your system before continuing.
 
 Clone the repo on your system:
