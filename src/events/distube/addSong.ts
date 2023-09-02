@@ -1,11 +1,12 @@
-import { createEvent, EventType } from '../../app/app';
 import { EmbedBuilder } from 'discord.js';
+import { createEvent } from '../../utils/event';
+import { EventCategory } from '../../enums/event';
 
 export const addSong = createEvent({
-    type: EventType.Distube,
+    type: EventCategory.Distube,
     name: 'addSong',
 
-    cb: async (app, queue, song) => {
+    callback: async (bot, queue, song) => {
         const queueLength = queue.songs.length - 1;
 
         const embed = new EmbedBuilder()

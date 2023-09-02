@@ -1,6 +1,5 @@
-import { createCommand } from '../../app/app';
-import { Guild, GuildMember, SlashCommandBuilder } from 'discord.js';
-import { inlineCode } from '../../util';
+import { createCommand } from '../../utils/command';
+import { Guild, GuildMember, inlineCode, SlashCommandBuilder, TextChannel } from 'discord.js';
 
 export const play = createCommand({
     data: new SlashCommandBuilder()
@@ -10,19 +9,14 @@ export const play = createCommand({
             .setName('search_term')
             .setDescription('Play any song by providing a search term or a url')
             .setRequired(true),
-        )
-        .addBooleanOption((option) => option
-            .setName('skip')
-            .setDescription('Skip to this song')
-            .setRequired(true),
         ),
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         const searchTermOption = interaction.options.getString('search_term')!;
-        const skipOption = interaction.options.getBoolean('skip')!;
 
         const guild = interaction.guild as Guild;
         const member = interaction.member as GuildMember;
+        const textChannel = interaction.channel as TextChannel;
         const voiceChannel = member.voice.channel;
 
         if (!voiceChannel) {
@@ -35,8 +29,8 @@ export const play = createCommand({
         }
 
         if (
-            !voiceChannel.members.has(app.client.user!.id) &&
-            app.client.voice.adapters.get(guild.id)
+            !voiceChannel.members.has(bot.client.user!.id) &&
+            bot.client.voice.adapters.get(guild.id)
         ) {
             await interaction.reply({
                 content: 'Unable to use this command without being in the same voice channel as me',
@@ -48,6 +42,10 @@ export const play = createCommand({
 
         await interaction.reply(`Searching ${inlineCode(searchTermOption)}`);
 
-        await app.player.play(interaction, searchTermOption, skipOption);
+        await bot.musicService.play(interaction, searchTermOption, {
+            textChannel,
+            voiceChannel,
+            member,
+        });
     },
 });

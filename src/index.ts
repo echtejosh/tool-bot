@@ -1,11 +1,11 @@
 import 'dotenv/config';
-import mongoose from 'mongoose';
-import { App } from './app/app';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { Player } from './app/player';
-import { DisTube } from 'distube';
-import * as commands from './commands/index';
-import * as events from './events/index';
+import { Bot } from './bot/Bot';
+import { EventService } from './services/EventService';
+import { CommandService } from './services/CommandService';
+import { MusicService } from './services/MusicService';
+import DisTube from 'distube';
+import mongoose from 'mongoose';
 
 const client = new Client({
     intents: [
@@ -17,47 +17,42 @@ const client = new Client({
     ],
 });
 
-const distube = new DisTube(client, {
-    nsfw: false,
-    searchSongs: 0,
-    searchCooldown: 30,
-    leaveOnEmpty: true,
-    emptyCooldown: 60,
-    leaveOnFinish: false,
-    leaveOnStop: true,
-    ytdlOptions: {
-        filter: 'audioonly',
-        quality: 'highestaudio',
-        highWaterMark: 1 << 25,
-        requestOptions: {
-            maxRetries: 3,
-            highWaterMark: 1 << 20,
-        },
-    },
+const distube = new DisTube(client);
+
+import * as events from './events';
+
+const eventService = new EventService({
+    events: [
+        events.interactionCreate,
+        events.messageCreate,
+        events.ready,
+    ],
 });
 
-const audioPlayer = new Player({
-    client: client,
-    distube: distube,
+const musicService = new MusicService({
+    events: [
+        events.addSong,
+        events.addList,
+    ],
+    client,
+    distube,
 });
 
-const app = new App({
-    client: client,
-    player: audioPlayer,
+import * as commands from './commands';
+
+const commandService = new CommandService({
     commands: Object.values(commands),
-    events: Object.values(events),
 });
 
-mongoose.connect(process.env.MONGO_URI!)
-    .then(() => console.log('Connected to the database'))
-    .catch(() => {
-        throw new Error('Unable to establish a connection to the database');
-    });
+const bot = new Bot({
+    client,
+    eventService,
+    commandService,
+    musicService,
+});
 
-client.login(process.env.SECRET_TOKEN)
-    .then(() => console.log('Logged in'))
-    .catch(() => {
-        throw new Error('Unable to login');
-    });
+mongoose.connect(process.env.MONGO_URI!);
 
-app.init();
+bot.login(process.env.DISCORD_TOKEN!);
+
+bot.init();

@@ -1,6 +1,5 @@
-import { GuildMember, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
-import { inlineCode } from '../../util';
-import { createCommand } from '../../app/app';
+import { GuildMember, inlineCode, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
+import { createCommand } from '../../utils/command';
 
 export const ban = createCommand({
     data: new SlashCommandBuilder()
@@ -16,7 +15,7 @@ export const ban = createCommand({
             .setRequired(true),
         ),
 
-    cb: async (app, interaction) => {
+    callback: async (app, interaction) => {
         const memberOption = interaction.options.getMember('user') as GuildMember;
 
         if (!memberOption.bannable) {

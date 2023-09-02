@@ -1,5 +1,5 @@
 import { GuildMember, SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
-import { createCommand } from '../../app/app';
+import { createCommand } from '../../utils/command';
 
 export const echo = createCommand({
     data: new SlashCommandBuilder()
@@ -15,7 +15,7 @@ export const echo = createCommand({
             .setDescription('Set reply to be anonymous'),
         ),
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         const member = interaction.member as GuildMember;
         const messageOption = interaction.options.getString('message');
 

@@ -1,6 +1,6 @@
-import { SlashCommandBuilder, PermissionsBitField } from 'discord.js';
-import { inlineCode } from '../../util';
-import { createCommand } from '../../app/app';
+import { SlashCommandBuilder, PermissionsBitField, inlineCode } from 'discord.js';
+import { createCommand } from '../../utils/command';
+import { stringify } from '../../utils/common';
 
 export const clear = createCommand({
     data: new SlashCommandBuilder()
@@ -18,7 +18,7 @@ export const clear = createCommand({
             .setMaxValue(100),
         ),
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         const amountOption = interaction.options.getNumber('amount');
 
         if (
@@ -31,6 +31,6 @@ export const clear = createCommand({
 
         const { size } = await interaction.channel.bulkDelete(amountOption);
 
-        await interaction.reply(`${inlineCode(size)} messages removed`);
+        await interaction.reply(`${inlineCode(stringify(size))} messages removed`);
     },
 });

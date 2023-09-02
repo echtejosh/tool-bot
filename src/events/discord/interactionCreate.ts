@@ -1,11 +1,11 @@
-import { createEvent, EventType } from '../../app/app';
-import * as commands from '../../commands';
+import { createEvent } from '../../utils/event';
+import { EventCategory } from '../../enums/event';
 
 export const interactionCreate = createEvent({
-    type: EventType.Discord,
+    type: EventCategory.Discord,
     name: 'interactionCreate',
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         if (!interaction.isCommand()) {
             return;
         }
@@ -19,7 +19,7 @@ export const interactionCreate = createEvent({
             return;
         }
 
-        const command = Object.values(commands).find(
+        const command = Object.values(bot.commandService.commands).find(
             ({ data }) => data.name === interaction.commandName,
         );
 
@@ -32,11 +32,7 @@ export const interactionCreate = createEvent({
         }
 
         try {
-            if (typeof command.cb === 'function') {
-                await command.cb(app, interaction);
-            } else {
-                console.error('Callback to this command is ignored');
-            }
+            await command.callback(bot, interaction);
         } catch (err) {
             console.error(err);
         }

@@ -1,5 +1,5 @@
 import { EmbedBuilder, Guild, GuildMember, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
-import { createCommand } from '../../app/app';
+import { createCommand } from '../../utils/command';
 import LeaderboardModel from '../../models/leaderboard';
 
 export const leaderboard = createCommand({
@@ -20,7 +20,7 @@ export const leaderboard = createCommand({
             .setDescription('Shows the leaderboard stats'),
         ),
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         const member = interaction.member as GuildMember;
         const guild = interaction.guild as Guild;
 
@@ -59,7 +59,7 @@ export const leaderboard = createCommand({
                         continue;
                     }
 
-                    const member = await app.client.users.fetch(entry.userId, {
+                    const member = await bot.client.users.fetch(entry.userId, {
                         cache: true,
                     });
 

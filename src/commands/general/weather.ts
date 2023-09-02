@@ -1,5 +1,5 @@
-import { CommandInteractionOptionResolver, EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { createCommand } from '../../app/app';
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
+import { createCommand } from '../../utils/command';
 import { load } from 'cheerio';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ export const weather = createCommand({
             .setRequired(true),
         ),
 
-    cb: async (client, interaction) => {
+    callback: async (bot, interaction) => {
         const searchTermOption = interaction.options.getString('search_term')!;
 
         try {

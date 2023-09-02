@@ -1,16 +1,17 @@
-import { createEvent, EventType } from '../../app/app';
 import LeaderboardModel from '../../models/leaderboard';
+import { createEvent } from '../../utils/event';
+import { EventCategory } from '../../enums/event';
 
 export const messageCreate = createEvent({
-    type: EventType.Discord,
+    type: EventCategory.Discord,
     name: 'messageCreate',
 
-    cb: async (app, message) => {
+    callback: async (bot, message) => {
         const memberId = message?.member?.id;
 
         if (
             !memberId ||
-            message.author.id === app.client.user!.id ||
+            message.author.id === bot.client.user!.id ||
             message.author.bot
         ) {
             return;

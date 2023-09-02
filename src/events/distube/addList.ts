@@ -1,13 +1,14 @@
-import { createEvent, EventType } from '../../app/app';
-import { TextChannel } from 'discord.js';
-import { inlineCode } from '../../util';
+import { createEvent } from '../../utils/event';
+import { EventCategory } from '../../enums/event';
+import { inlineCode, TextChannel } from 'discord.js';
+import { stringify } from '../../utils/common';
 
 export const addList = createEvent({
-    type: EventType.Distube,
+    type: EventCategory.Distube,
     name: 'addList',
 
-    cb: async (app, queue, playlist) => {
+    callback: async (bot, queue, playlist) => {
         const textChannel = queue.textChannel as TextChannel;
-        await textChannel.send(`Added ${inlineCode(playlist.songs.length)} songs to the queue`);
+        await textChannel.send(`Added ${inlineCode(stringify(playlist.songs.length))} songs to the queue`);
     },
 });

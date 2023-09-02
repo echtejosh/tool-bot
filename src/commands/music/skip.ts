@@ -1,14 +1,14 @@
-import { createCommand } from '../../app/app';
 import { Guild, SlashCommandBuilder } from 'discord.js';
+import { createCommand } from '../../utils/command';
 
 export const skip = createCommand({
     data: new SlashCommandBuilder()
         .setName('skip')
         .setDescription('Skip the song that is playing now'),
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = app.player.distube.getQueue(guild);
+        const queue = bot.musicService.getQueue(guild);
 
         if (!queue) {
             await interaction.reply({

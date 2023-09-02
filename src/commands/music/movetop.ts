@@ -1,4 +1,4 @@
-import { createCommand } from '../../app/app';
+import { createCommand } from '../../utils/command';
 import { Guild, GuildMember, SlashCommandBuilder } from 'discord.js';
 
 export const movetop = createCommand({
@@ -11,9 +11,9 @@ export const movetop = createCommand({
             .setRequired(true),
         ),
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = app.player.distube.getQueue(guild);
+        const queue = bot.musicService.getQueue(guild);
         const member = interaction.member as GuildMember;
         const voiceChannel = member.voice.channel;
         const position = interaction.options.getNumber('position')!;
@@ -37,8 +37,8 @@ export const movetop = createCommand({
         }
 
         if (
-            !voiceChannel.members.has(app.client.user!.id) &&
-            app.client.voice.adapters.get(guild.id)
+            !voiceChannel.members.has(bot.client.user!.id) &&
+            bot.client.voice.adapters.get(guild.id)
         ) {
             await interaction.reply({
                 content: 'Unable to use this command without being in the same voice channel as me',

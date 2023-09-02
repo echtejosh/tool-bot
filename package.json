@@ -1,5 +1,5 @@
 {
-  "name": "chocolate",
+  "name": "mocha",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -32,7 +32,8 @@
     "puppeteer": "^21.0.3",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "tsyringe": "^4.8.0",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "@types/node-cron": "^3.0.8"

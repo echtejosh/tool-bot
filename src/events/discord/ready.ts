@@ -1,10 +1,11 @@
-import { createEvent, EventType } from '../../app/app';
+import { createEvent } from '../../utils/event';
+import { EventCategory } from '../../enums/event';
 
 export const ready = createEvent({
-    type: EventType.Discord,
+    type: EventCategory.Discord,
     name: 'ready',
 
-    cb: async (app) => {
-        app.deployCommands();
+    callback: async (bot) => {
+        bot.commandService.deployCommands(bot.client);
     },
 });

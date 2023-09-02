@@ -1,15 +1,15 @@
-import { createCommand } from '../../app/app';
-import { bold } from '../../util';
-import { EmbedBuilder, Guild, SlashCommandBuilder } from 'discord.js';
+import { bold, EmbedBuilder, Guild, SlashCommandBuilder } from 'discord.js';
+import { createCommand } from '../../utils/command';
+import { stringify } from '../../utils/common';
 
 export const queue = createCommand({
     data: new SlashCommandBuilder()
         .setName('queue')
         .setDescription('Show upcoming songs'),
 
-    cb: async (app, interaction) => {
+    callback: async (bot, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = app.player.distube.getQueue(guild);
+        const queue = bot.musicService.getQueue(guild);
 
         if (!queue) {
             await interaction.reply({
@@ -24,7 +24,7 @@ export const queue = createCommand({
         const upcomingSongs = queue.songs.slice(1, 11);
 
         const description = upcomingSongs
-            .map((song, i) => `${bold(i + 1)} - ${song.name} - ${song.formattedDuration}`)
+            .map((song, i) => `${bold(stringify(i + 1))} - ${song.name} - ${song.formattedDuration}`)
             .join('\n\n');
 
         const embed = new EmbedBuilder()
