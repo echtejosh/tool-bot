@@ -25,7 +25,7 @@ export const addSong = createEvent({
                     inline: true,
                 },
                 {
-                    name: 'Estimate time of playback',
+                    name: 'Estimated time of playback',
                     value: queue.formattedCurrentTime,
                     inline: true,
                 },

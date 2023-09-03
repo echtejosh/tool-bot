@@ -9,6 +9,7 @@ export const addList = createEvent({
 
     callback: async (bot, queue, playlist) => {
         const textChannel = queue.textChannel as TextChannel;
+
         await textChannel.send(`Added ${inlineCode(stringify(playlist.songs.length))} songs to the queue`);
     },
 });
