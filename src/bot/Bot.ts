@@ -28,8 +28,13 @@ export class Bot {
         this.musicService.setupEventListeners(this);
     }
 
-    public login(token: string) {
-        this.client.login(token);
-        console.log('Connected to Discord');
+    public async login(token: string) {
+        try {
+            await this.client.login(token);
+
+            console.log('Established a connection to Discord');
+        } catch (err) {
+            throw new Error('Failed to establish a connection to Discord');
+        }
     }
 }

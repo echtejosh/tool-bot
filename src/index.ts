@@ -1,11 +1,11 @@
 import 'dotenv/config';
 import { Client, GatewayIntentBits } from 'discord.js';
 import { Bot } from './bot/Bot';
+import { DatabaseService } from './services/DatabaseService';
 import { EventService } from './services/EventService';
 import { CommandService } from './services/CommandService';
 import { MusicService } from './services/MusicService';
 import DisTube from 'distube';
-import mongoose from 'mongoose';
 
 const client = new Client({
     intents: [
@@ -18,6 +18,8 @@ const client = new Client({
 });
 
 const distube = new DisTube(client);
+
+const databaseService = new DatabaseService();
 
 import * as events from './events';
 
@@ -51,7 +53,7 @@ const bot = new Bot({
     musicService,
 });
 
-mongoose.connect(process.env.MONGO_URI!);
+databaseService.connect(process.env.MONGO_URI!);
 
 bot.login(process.env.DISCORD_TOKEN!);
 
