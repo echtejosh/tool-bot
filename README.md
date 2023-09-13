@@ -21,10 +21,11 @@ Make sure you install [FFmpeg](https://ffmpeg.org/) on your system before contin
     npm install
     
 ### Credentials
-Navigate to `.env.example` and replace the placeholders, after that rename the file to `.env`.
 
 > **IMPORTANT**
 Mongoose requires Atlas. See [here](https://www.mongodb.com/docs/manual/reference/connection-string/) for more information.
+
+Navigate to `.env.example` and replace the placeholders, after that rename the file to `.env`.
 
 ### Usage
 To start the project:
