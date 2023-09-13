@@ -13,4 +13,5 @@ services:
       # Set here your Discord bot token
       - APP_TOKEN=
       - MONGO_URI=
-    command: npm start
+    command: |
+      npm start
