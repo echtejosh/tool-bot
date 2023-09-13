@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    image: node:20-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      # Set here your Discord bot token
+      - APP_TOKEN=
+      - MONGO_URI=
+    command: npm start
