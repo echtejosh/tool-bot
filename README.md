@@ -39,6 +39,9 @@ Navigate to `docker-compose.example.yml` and set variable values, after that rem
 
 ### Usage
 
+> **IMPORTANT**
+For windows, make sure that you use [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install) when using `docker-compose build`. 
+
 Before you run, make sure you build the container first:
 
     docker-compose build
