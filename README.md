@@ -30,3 +30,22 @@ Mongoose requires Atlas. See [here](https://www.mongodb.com/docs/manual/referenc
 To start the project:
 
     npm start
+
+
+## Docker setup
+
+### Credentials
+Navigate to `docker-compose.example.yml` and set variable values, after that remove `.example` from the file name.
+
+### Usage
+
+Before you run, make sure you build the container first:
+
+    docker-compose build
+
+To start the project:
+
+    docker-compose up
+    
+
+
