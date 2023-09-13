@@ -55,6 +55,6 @@ const bot = new Bot({
 
 databaseService.connect(process.env.MONGO_URI!);
 
-bot.login(process.env.DISCORD_TOKEN!);
+bot.login(process.env.APP_TOKEN!);
 
 bot.init();
