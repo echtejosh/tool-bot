@@ -13,7 +13,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .build
 .idea
 .git
-.dockerignore
+docker-compose.yml
 
 # Runtime data
 pids
