@@ -41,7 +41,7 @@ Navigate to `docker-compose.yml` and set variable values inside of environment.
 ### Usage
 
 > **IMPORTANT**
-For windows, make sure that you use [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install) when using `docker-compose build`. 
+For windows, make sure that you use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) when using `docker-compose build`. 
 
 Before you run, make sure you build the container first:
 
