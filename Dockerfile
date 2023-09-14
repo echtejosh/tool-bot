@@ -1,14 +1,13 @@
-FROM node:20-alpine
-
+FROM node:20-alpine as builder
 WORKDIR /usr/src/app
 
-RUN apk update && apk add --no-cache python3 make g++
-
-COPY package*.json .
-
-RUN mkdir node_modules
-
-RUN npm i -g pnpm
-RUN npm ci --no-audit
-
+COPY package*.json ./
+RUN npm install
 COPY . .
+RUN npm run build
+
+FROM node:14-alpine
+WORKDIR /usr/src/app
+
+COPY --from=builder /usr/src/app/build ./build
+COPY --from=builder /usr/src/app/node_modules ./node_modules
