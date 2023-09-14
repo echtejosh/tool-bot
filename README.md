@@ -36,7 +36,7 @@ To start the project:
 ## Docker setup
 
 ### Credentials
-Navigate to `docker-compose.example.yml` and set variable values, after that remove `.example` from the file name.
+Navigate to `docker-compose.yml` and set variable values inside of environment.
 
 ### Usage
 
