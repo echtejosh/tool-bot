@@ -8,7 +8,7 @@ COPY package*.json .
 
 RUN mkdir node_modules
 
-RUN npm install -g pnpm
-RUN pnpm install
+RUN npm i -g pnpm
+RUN npm ci --no-audit
 
 COPY . .
