@@ -6,6 +6,9 @@ RUN apk update && apk add --no-cache python3 make g++
 
 COPY package*.json .
 
-RUN npm install
+RUN mkdir node_modules
+
+RUN npm install -g pnpm
+RUN pnpm install
 
 COPY . .
