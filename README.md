@@ -1,10 +1,10 @@
 # Mocha
 
-Mocha is a multipurpose server management bot for [Discord](https://discord.com/company). For moderating servers and logging events that happen in real-time!
-
-Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
+Mocha is a versatile server management bot designed to enhance the functionality and moderation capabilities of your [Discord](https://discord.com/company) server!
 
 ## Quick setup &mdash; for beginners
+
+Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
 
 ### Installation
 
@@ -41,7 +41,7 @@ Navigate to `docker-compose.yml` and set variable values inside of environment.
 ### Usage
 
 > **IMPORTANT**
-For windows, make sure that you use [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install) when using `docker-compose build`. 
+For windows, make sure that you use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) when using `docker-compose build`. 
 
 Before you run, make sure you build the container first:
 
