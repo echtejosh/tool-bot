@@ -1,6 +1,6 @@
 # Mocha
 
-Mocha is a versatile server management bot designed to enhance the functionality and moderation capabilities of your [Discord](https://discord.com/company) server!
+An all-in-one server management companion for [Discord](https://discord.com/company). Elevate your server's capabilities with advanced moderation tools, audio playback features, real-time weather tracking, and server logging!
 
 ## Quick setup &mdash; for beginners
 
