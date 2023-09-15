@@ -13,7 +13,7 @@ Some features may still be a work in progress
 - Database Support with Mongoose
 - Modular Command and Event Implementation
 
-## Quick setup &mdash; for beginners
+## Setup
 
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
 
