@@ -1,6 +1,6 @@
 # Mocha
 
-Elevate your server's capabilities with advanced moderation tools, audio playback features, real-time weather tracking, and server logging!
+A server management bot for Discord. Elevate your server with advanced moderation tools, audio playback features, real-time weather tracking, and server logging!
 
 ## Features
 
