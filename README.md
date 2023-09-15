@@ -2,6 +2,14 @@
 
 An all-in-one server management companion for [Discord](https://discord.com/company). Elevate your server's capabilities with advanced moderation tools, audio playback features, real-time weather tracking, and server logging!
 
+## Features
+
+- Event-driven Architecture
+- User-friendly Setup
+- Docker Compatibility
+- Database Support with Mongoose
+- Modular Command and Event Implementation
+
 ## Quick setup &mdash; for beginners
 
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
