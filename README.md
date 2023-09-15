@@ -44,7 +44,7 @@ To start the project:
     npm start
 
 
-## Docker setup
+## Docker
 
 ### Credentials
 Navigate to `docker-compose.yml` and set variable values inside of environment.
