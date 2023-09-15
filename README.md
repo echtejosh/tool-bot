@@ -1,5 +1,6 @@
 # Mocha
 
+> **NOTE**
 An all-in-one server management companion for [Discord](https://discord.com/company). Elevate your server's capabilities with advanced moderation tools, audio playback features, real-time weather tracking, and server logging!
 
 ## Features
