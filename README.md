@@ -1,4 +1,4 @@
-![cover](cover.png)
+![cover](banner.png)
 
 <p align="center">
     <img src="https://img.shields.io/badge/release-mocha-blue.svg?style=flat-square"/>
