@@ -6,10 +6,6 @@
     <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square"/></a>
 </p>
 
-# Mocha
-
-A server management bot for Discord. Elevate your server with advanced moderation tools, audio playback features, real-time weather tracking, and server logging!
-
 ## Features
 
 > **NOTE**
