@@ -25,7 +25,7 @@ Make sure you have the required dependencies needed to run Mocha. See [here](htt
 
 Clone the repo on your system:
 
-    git clone https://github.com/mochidochi/mocha
+    git clone https://github.com/echtyushi/mocha
 
 Then, navigate to the directory and install the NPM packages:
 
