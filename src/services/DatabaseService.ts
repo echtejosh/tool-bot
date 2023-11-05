@@ -11,9 +11,9 @@ export class DatabaseService implements Service {
         try {
             await mongoose.connect(uri);
 
-            console.log('Established a connection to database');
+            console.log('Established a connection to MongoDB');
         } catch (err) {
-            console.error('Failed to establish a connection to database');
+            console.error('Failed to establish a connection to MongoDB');
         }
     }
 }
