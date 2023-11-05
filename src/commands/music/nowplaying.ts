@@ -24,6 +24,7 @@ export const nowplaying = createCommand({
 
         const embed = new EmbedBuilder()
             .setTitle(currentSong.name!)
+            .setColor('#2B2D31')
             .setTimestamp()
             .setFields([
                 {

@@ -12,6 +12,7 @@ export const addSong = createEvent({
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'Added to Queue' })
             .setTitle(song.name!)
+            .setColor('#2B2D31')
             .setTimestamp()
             .setFields([
                 {

@@ -29,6 +29,7 @@ export const queue = createCommand({
 
         const embed = new EmbedBuilder()
             .setTitle('Now Playing')
+            .setColor('#2B2D31')
             .setDescription(`${currentSong.name} - ${currentSong.formattedDuration}`)
             .setFooter({ text: `${queue.songs.length - 1} song(s) in queue` })
             .addFields({
