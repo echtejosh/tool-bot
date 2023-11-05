@@ -9,7 +9,7 @@ export const queue = createCommand({
 
     callback: async (bot, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = bot.musicService.getQueue(guild);
+        const queue = bot.services.music.getQueue(guild);
 
         if (!queue) {
             await interaction.reply({

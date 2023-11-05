@@ -6,6 +6,6 @@ export const ready = createEvent({
     name: 'ready',
 
     callback: async (bot) => {
-        bot.commandService.deployCommands(bot.client);
+        bot.services.command.deployCommands(bot.client);
     },
 });

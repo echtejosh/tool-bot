@@ -42,7 +42,7 @@ export const play = createCommand({
 
         await interaction.reply(`Searching ${inlineCode(searchTermOption)}`);
 
-        await bot.musicService.play(interaction, searchTermOption, {
+        await bot.services.music.play(interaction, searchTermOption, {
             textChannel,
             voiceChannel,
             member,

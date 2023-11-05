@@ -42,7 +42,7 @@ export class MusicService implements Service {
 
     public setupEventListeners(bot: Bot) {
         for (const { name, callback } of this.events) {
-            bot.client.on(name, (...args) => callback(bot, ...args));
+            this.distube.on(name, (...args: any[]) => callback(bot, ...args));
         }
     }
 

@@ -8,7 +8,7 @@ export const stop = createCommand({
 
     callback: async (app, interaction) => {
         const guild = interaction.guild as Guild;
-        const queue = app.musicService.getQueue(guild);
+        const queue = app.services.music.getQueue(guild);
 
         if (!queue) {
             await interaction.reply({
