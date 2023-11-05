@@ -19,7 +19,7 @@ export const interactionCreate = createEvent({
             return;
         }
 
-        const command = Object.values(bot.commandService.commands).find(
+        const command = Object.values(bot.services.command.commands).find(
             ({ data }) => data.name === interaction.commandName,
         );
 

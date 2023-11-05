@@ -5,12 +5,12 @@ import {
     GuildMember,
     TextChannel,
     VoiceBasedChannel,
-    VoiceChannel,
 } from 'discord.js';
 import { EventCategory } from '../enums/event';
 import { Event } from '../interfaces/event';
 import DisTube from 'distube';
 import { Bot } from '../bot/Bot';
+import { Service } from './Service';
 
 export interface MusicServiceEvents {
     error: [CommandInteraction, Error];
@@ -29,7 +29,7 @@ export interface PlayOptions {
     skip?: boolean;
 }
 
-export class MusicService {
+export class MusicService implements Service {
     private readonly client: Client;
     private readonly distube: DisTube;
     private readonly events: Event<EventCategory.Distube, any>[];

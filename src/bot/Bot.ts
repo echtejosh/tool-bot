@@ -3,29 +3,29 @@ import { CommandService } from '../services/CommandService';
 import { EventService } from '../services/EventService';
 import { MusicService } from '../services/MusicService';
 
+export interface Services {
+    command: CommandService;
+    event: EventService;
+    music: MusicService;
+}
+
 export interface BotOptions {
     client: Client;
-    commandService: CommandService;
-    eventService: EventService;
-    musicService: MusicService;
+    services: Services;
 }
 
 export class Bot {
     public readonly client: Client;
-    public readonly commandService: CommandService;
-    public readonly eventService: EventService;
-    public readonly musicService: MusicService;
+    public readonly services: Services;
 
     constructor(options: BotOptions) {
         this.client = options.client;
-        this.commandService = options.commandService;
-        this.eventService = options.eventService;
-        this.musicService = options.musicService;
+        this.services = options.services;
     }
 
     public init() {
-        this.eventService.setupEventListeners(this);
-        this.musicService.setupEventListeners(this);
+        this.services.event.setupEventListeners(this);
+        this.services.music.setupEventListeners(this);
     }
 
     public async login(token: string) {
