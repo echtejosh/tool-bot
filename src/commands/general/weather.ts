@@ -26,7 +26,6 @@ export const weather = createCommand({
 
             const embed = new EmbedBuilder()
                 .setTitle(`Weather in ${current.attr('observationpoint')}`)
-                .setColor('#2B2D31')
                 .addFields(
                     {
                         name: 'Temperature',

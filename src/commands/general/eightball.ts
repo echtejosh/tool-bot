@@ -48,7 +48,6 @@ export const eightball = createCommand({
 
         const embed = new EmbedBuilder()
             .setTitle(`Question: ${questionOption}`)
-            .setColor('#2B2D31')
             .setDescription(`Answer: ${answers[index]}`);
 
         await interaction.reply({ embeds: [embed] });

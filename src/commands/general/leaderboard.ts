@@ -81,7 +81,6 @@ export const leaderboard = createCommand({
                 const embed = new EmbedBuilder()
                     .setTitle('Leaderboard')
                     .setDescription('The list of the most active members of this server')
-                    .setColor('#2B2D31')
                     .setTimestamp()
                     .setFields([
                         {
