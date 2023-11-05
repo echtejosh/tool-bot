@@ -4,6 +4,8 @@ import { SpotifyPlugin } from '@distube/spotify';
 
 export const distube = new DisTube(client, {
     plugins: [
-        new SpotifyPlugin()
+        new SpotifyPlugin({
+            emitEventsAfterFetching: true,
+        })
     ]
 });
