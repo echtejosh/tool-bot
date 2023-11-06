@@ -44,6 +44,6 @@ export const shuffle = createCommand({
 
         await queue.shuffle();
 
-        await interaction.reply('Queue has been randomized');
+        await interaction.reply('Queue has been shuffled');
     },
 });

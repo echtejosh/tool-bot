@@ -10,7 +10,6 @@ import { EventCategory } from '../enums/event';
 import { Event } from '../interfaces/event';
 import DisTube from 'distube';
 import { Bot } from '../bot/Bot';
-import { Service } from './Service';
 
 export interface MusicServiceEvents {
     error: [CommandInteraction, Error];
@@ -29,7 +28,7 @@ export interface PlayOptions {
     skip?: boolean;
 }
 
-export class MusicService implements Service {
+export class MusicService {
     private readonly client: Client;
     private readonly distube: DisTube;
     private readonly events: Event<EventCategory.Distube, any>[];
@@ -50,7 +49,7 @@ export class MusicService implements Service {
         return this.distube.getQueue(guild.id);
     }
 
-    public async play(interaction: CommandInteraction, searchTerm: string, options: PlayOptions) {
+    public async play(searchTerm: string, options: PlayOptions) {
         const { skip, member, voiceChannel, textChannel } = options;
 
         try {

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-import { Service } from './Service';
 
-export class DatabaseService implements Service {
+export class DatabaseService {
 
     public isConnected() {
         return mongoose.connection.readyState === 1;

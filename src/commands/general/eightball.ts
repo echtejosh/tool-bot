@@ -14,7 +14,7 @@ export const eightball = createCommand({
     callback: async (bot, interaction) => {
         const questionOption = interaction.options.getString('question')!;
 
-        const list1 = [
+        const answers = [
             'It is certain',
             'It is decidedly so',
             'Without a doubt',
@@ -25,17 +25,12 @@ export const eightball = createCommand({
             'Outlook good',
             'Yes',
             'Signs point to yes',
-        ];
-
-        const list2 = [
             'Reply hazy, try again',
             'Ask again later',
             'Better not tell you now',
+            'Better not tell you now',
             'Cannot predict now',
             'Concentrate and ask again',
-        ];
-
-        const list3 = [
             'Don\'t count on it',
             'My reply is no',
             'My sources say no',
@@ -43,7 +38,6 @@ export const eightball = createCommand({
             'Very doubtful',
         ];
 
-        const answers = list1.concat(list2, list3);
         const index = Math.floor(Math.random() * answers.length);
 
         const embed = new EmbedBuilder()

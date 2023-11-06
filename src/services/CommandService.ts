@@ -1,12 +1,11 @@
 import { Command } from '../interfaces/command';
 import { Client } from 'discord.js';
-import { Service } from './Service';
 
 export interface CommandServiceOptions {
     commands: Command[];
 }
 
-export class CommandService implements Service {
+export class CommandService {
     public readonly commands: Command[];
 
     constructor(options: CommandServiceOptions) {

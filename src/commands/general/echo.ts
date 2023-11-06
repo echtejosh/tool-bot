@@ -18,6 +18,7 @@ export const echo = createCommand({
     callback: async (bot, interaction) => {
         const member = interaction.member as GuildMember;
         const messageOption = interaction.options.getString('message');
+        const hiddenOption = interaction.options.getBoolean('hidden');
 
         if (
             !messageOption ||
@@ -25,8 +26,6 @@ export const echo = createCommand({
         ) {
             return;
         }
-
-        const hiddenOption = interaction.options.getBoolean('hidden');
 
         if (hiddenOption) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator)) {
