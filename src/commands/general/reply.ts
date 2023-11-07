@@ -27,9 +27,14 @@ export const reply = createCommand({
             return;
         }
 
-        const message = await interaction.channel.messages.fetch(idOption);
-
-        await message.reply(messageOption);
-        return;
+        try {
+            const message = await interaction.channel.messages.fetch(idOption);
+            await message.reply(messageOption);
+        } catch (err) {
+            await interaction.reply({
+                content: 'No message was found using the provided message id, try again',
+                ephemeral: true,
+            });
+        }
     },
 });
