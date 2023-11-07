@@ -1,4 +1,5 @@
 export { echo } from './general/echo';
+export { replyto } from './general/replyto';
 export { weather } from './general/weather';
 export { eightball } from './general/eightball';
 export { leaderboard } from './general/leaderboard';

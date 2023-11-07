@@ -10,15 +10,15 @@ export const echo = createCommand({
             .setDescription('Provide a message')
             .setRequired(true),
         )
-        .addStringOption((option) => option
-            .setName('reply_to')
-            .setDescription('Set reply to someone (type in "none" to not reply)'),
+        .addBooleanOption((option) => option
+            .setName('hidden')
+            .setDescription('Set reply to be anonymous'),
         ),
 
     callback: async (bot, interaction) => {
         const member = interaction.member as GuildMember;
         const messageOption = interaction.options.getString('message');
-        const replyToOption = interaction.options.getString('reply_to');
+        const hiddenOption = interaction.options.getBoolean('hidden');
 
         if (
             !messageOption ||
@@ -27,7 +27,7 @@ export const echo = createCommand({
             return;
         }
 
-        if (replyToOption) {
+        if (hiddenOption) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator)) {
                 await interaction.reply({
                     content: 'You do not have the necessary permissions to use this command',
@@ -37,16 +37,11 @@ export const echo = createCommand({
                 return;
             }
 
-            if (replyToOption == 'none') {
-                await interaction.deferReply();
-                await interaction.deleteReply();
+            await interaction.deferReply();
+            await interaction.deleteReply();
 
-                await interaction.channel.send(messageOption);
-            } else {
-                const message = await interaction.channel.messages.fetch(replyToOption);
-
-                message.reply(messageOption);
-            }
+            await interaction.channel.send(messageOption);
+            return;
         }
 
         await interaction.reply(messageOption);
