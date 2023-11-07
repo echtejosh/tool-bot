@@ -30,6 +30,11 @@ export const reply = createCommand({
         try {
             const message = await interaction.channel.messages.fetch(idOption);
             await message.reply(messageOption);
+
+            await interaction.deferReply();
+            await interaction.deleteReply();
+
+            return;
         } catch (err) {
             await interaction.reply({
                 content: 'No message was found using the provided message id, try again',
