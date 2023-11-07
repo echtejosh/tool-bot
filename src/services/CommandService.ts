@@ -13,6 +13,8 @@ export class CommandService {
     }
 
     public deployCommands(client: Client) {
+        console.log('Commands are deployed')
+
         client.application?.commands.set(this.commands.map((command) => command.data));
     }
 }

@@ -13,7 +13,6 @@ export const play = createCommand({
 
     callback: async (bot, interaction) => {
         const searchTermOption = interaction.options.getString('search_term')!;
-
         const guild = interaction.guild as Guild;
         const member = interaction.member as GuildMember;
         const textChannel = interaction.channel as TextChannel;
@@ -42,10 +41,17 @@ export const play = createCommand({
 
         await interaction.reply(`Searching ${inlineCode(searchTermOption)}`);
 
-        await bot.services.music.play(searchTermOption, {
+        const request = await bot.services.music.play(searchTermOption, {
             textChannel,
             voiceChannel,
             member,
         });
+
+        if (!request) {
+            await interaction.reply({
+                content: 'The URL is private or unavailable',
+                ephemeral: true,
+            });
+        }
     },
 });

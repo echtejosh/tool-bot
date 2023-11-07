@@ -1,11 +1,11 @@
 import { Client } from 'discord.js';
 import { CommandService } from '../services/CommandService';
-import { EventService } from '../services/EventService';
+import { AppService } from '../services/AppService';
 import { MusicService } from '../services/MusicService';
 
 export interface Services {
     command: CommandService;
-    event: EventService;
+    app: AppService;
     music: MusicService;
 }
 
@@ -24,7 +24,7 @@ export class Bot {
     }
 
     public init() {
-        this.services.event.setupEventListeners(this);
+        this.services.app.setupEventListeners(this);
         this.services.music.setupEventListeners(this);
     }
 

@@ -1,13 +1,13 @@
 import { client } from './client';
 import { distube } from './distube';
-import { EventService } from './services/EventService';
+import { AppService } from './services/AppService';
 import { MusicService } from './services/MusicService';
 import { CommandService } from './services/CommandService';
 import { DatabaseService } from './services/DatabaseService';
 import * as events from './events';
 import * as commands from './commands';
 
-export const event = new EventService({
+export const app = new AppService({
     events: [
         events.interactionCreate,
         events.messageCreate,
