@@ -47,11 +47,11 @@ export const play = createCommand({
             member,
         });
 
-        if (!request) {
-            await interaction.reply({
-                content: 'The URL is private or unavailable',
-                ephemeral: true,
-            });
+        if (
+            !request &&
+            interaction.channel
+        ) {
+            await interaction.channel.send('The URL is private or unavailable');
         }
     },
 });
