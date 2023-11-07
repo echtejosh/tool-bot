@@ -1,9 +1,9 @@
 import { SlashCommandBuilder, PermissionsBitField } from 'discord.js';
 import { createCommand } from '../../utils/command';
 
-export const replyto = createCommand({
+export const reply = createCommand({
     data: new SlashCommandBuilder()
-        .setName('reply_to')
+        .setName('reply')
         .setDescription('Use the bot to reply to someone')
         .setDefaultMemberPermissions(
             PermissionsBitField.Flags.Administrator
