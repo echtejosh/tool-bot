@@ -9,8 +9,6 @@
 ## Features
 
 > **NOTE**
-Some features may still be a work in progress
-
 - Event-driven Architecture
 - User-friendly Setup
 - Docker Compatibility
