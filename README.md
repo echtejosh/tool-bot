@@ -1,11 +1,3 @@
-![cover](cover.png)
-
-<p align="center">
-    <img src="https://img.shields.io/badge/release-mocha-blue.svg?style=flat-square"/>
-    <img src="https://img.shields.io/github/stars/mochidochi/mocha.svg?style=flat-square"/>
-    <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square"/></a>
-</p>
-
 ## Features
 
 - Event-driven Architecture
