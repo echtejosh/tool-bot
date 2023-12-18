@@ -1,3 +1,6 @@
+# Chocolate 
+A server management bot for Discord. Featuring advanced moderation tools, audio playback features, real-time weather tracking, and server logging.
+
 ## Features
 
 - Event-driven Architecture
@@ -6,11 +9,8 @@
 - Database Support with Mongoose
 - Modular Command and Event Implementation
 
-## Setup
-
+## Installation
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
-
-### Installation
 
 Clone the repo on your system:
 
@@ -21,11 +21,11 @@ Then, navigate to the directory and install the NPM packages:
     npm install
 
 
-### Credentials
+## Credentials
 
 Navigate to `.env.example` and replace the placeholders, after that rename the file to `.env`.
 
-### Usage
+## Usage
 To start the project:
 
     npm start
@@ -36,7 +36,7 @@ To start the project:
 ### Credentials
 Navigate to `docker-compose.yml` and set variable values inside of environment.
 
-### Usage
+### Build
 Before you run, make sure you build the container first:
 
     docker-compose build
