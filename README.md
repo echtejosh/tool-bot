@@ -8,7 +8,6 @@
 
 ## Features
 
-> **NOTE**
 - Event-driven Architecture
 - User-friendly Setup
 - Docker Compatibility
