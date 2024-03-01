@@ -3,11 +3,11 @@ A server management bot for Discord. Featuring advanced moderation tools, audio 
 
 ## Features
 
-- Event-driven Architecture
-- User-friendly Setup
-- Docker Compatibility
-- Database Support with Mongoose
-- Modular Command and Event Implementation
+- Event-driven architecture
+- User-friendly setup
+- Docker compatibility
+- Database support with Mongoose
+- Modular command and event Implementation
 
 ## Installation
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
