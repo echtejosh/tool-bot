@@ -1,4 +1,4 @@
-# Chocolate 
+# @chocolate 
 A server management bot for Discord. Featuring advanced moderation tools, audio playback features, real-time weather tracking, and server logging.
 
 ## Features
