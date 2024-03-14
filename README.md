@@ -1,13 +1,12 @@
 # @chocolate 
-A server management bot for Discord. Featuring advanced moderation tools, audio playback features, real-time weather tracking, and server logging.
+A simple yet solid Discord bot.
 
 ## Features
 
-- Event-driven architecture
 - User-friendly setup
 - Docker compatibility
 - Database support with Mongoose
-- Modular command and event Implementation
+- Modular command and event implementation
 
 ## Installation
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
