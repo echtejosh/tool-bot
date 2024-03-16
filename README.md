@@ -1,12 +1,6 @@
 # @chocolate 
-A simple bot.
 
-## Features
-
-- User-friendly setup
-- Docker compatibility
-- Database support with Mongoose
-- Modular command and event implementation
+An mutli-purpose everything-doeer.
 
 ## Installation
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
