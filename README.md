@@ -1,6 +1,6 @@
 # @chocolate 
 
-An mutli-purpose everything-doeer.
+A mutli-purpose everything-doeer.
 
 ## Installation
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
