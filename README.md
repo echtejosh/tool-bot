@@ -1,5 +1,5 @@
 # @chocolate 
-A simple yet solid Discord bot.
+A simple bot.
 
 ## Features
 
