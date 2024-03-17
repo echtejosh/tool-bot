@@ -1,4 +1,4 @@
-# @chocolate-bot
+# @something-bot
 
 A mutli-purpose everything-doeer.
 
