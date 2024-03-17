@@ -1,4 +1,4 @@
-# @something-bot
+# @worker-bot
 
 A mutli-purpose everything-doeer.
 
