@@ -1,6 +1,6 @@
 # @worker-bot
 
-A mutli-purpose everything-doeer.
+A mutli-purpose @discord bot.
 
 ## Installation
 Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
