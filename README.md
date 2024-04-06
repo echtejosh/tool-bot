@@ -3,7 +3,7 @@
 A mutli-purpose @discord bot.
 
 ## Installation
-Make sure you have the required dependencies needed to run Mocha. See [here](https://discordjs.guide/preparations/) for more information.
+Make sure you have the required dependencies needed to run this bot. See [here](https://discordjs.guide/preparations/) for more information.
 
 Clone the repo on your system:
 
