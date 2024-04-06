@@ -7,7 +7,7 @@ Make sure you have the required dependencies needed to run this bot. See [here](
 
 Clone the repo on your system:
 
-    git clone https://github.com/echtyushi/mocha
+    git clone https://github.com/echtyushi/worker-bot
 
 Then, navigate to the directory and install the NPM packages:
 
