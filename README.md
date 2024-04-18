@@ -1,4 +1,4 @@
-# @worker-bot
+# Hangout
 
 A mutli-purpose @discord bot.
 
