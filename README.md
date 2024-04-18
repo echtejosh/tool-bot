@@ -1,4 +1,4 @@
-# Hangout
+# Chocolate
 
 A mutli-purpose @discord bot.
 
