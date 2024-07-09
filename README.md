@@ -1,7 +1,3 @@
-## About Me
-
-A mutli-purpose @discord bot.
-
 ## Installation
 Make sure you have the required dependencies needed to run this bot. See [here](https://discordjs.guide/preparations/) for more information.
 
